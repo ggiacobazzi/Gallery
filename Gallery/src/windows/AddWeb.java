@@ -43,7 +43,7 @@ public class AddWeb implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//this.url = p.
-		System.out.println("Ciao");
+		//System.out.println("Ciao");
 		
 	}
 
