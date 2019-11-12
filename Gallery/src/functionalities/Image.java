@@ -25,7 +25,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-public class Image implements ActionListener{
+import windows.AddWeb;
+
+public class Image {
 
 	/**
 	 * Metadata of the image
@@ -66,82 +68,59 @@ public class Image implements ActionListener{
 		BufferedImage immy = null;
 		JLabel picLabel = new JLabel();
 		picLabel.setSize(160, 108);  //240, 160
+		Boolean notLoaded = true;
 		
 		//If the image is taken from an url
-		if(fromweb) {
-			JFrame jf = new JFrame("Add Image from web");
-			jf.setSize(new Dimension(500, 100));
-			jf.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-			jf.setResizable(false);
-			JPanel jp = new JPanel();
-			jf.add(jp);
-			JLabel jtf = new JLabel("Insert URL: ");
-			jp.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-			jp.add(jtf);
-			JTextField box = new JTextField();
-			box.setPreferredSize(new Dimension(200, 25));
-			jp.add(box);
-			JButton send = new JButton("Enter");
-			jp.add(send);
-			jf.setLocationRelativeTo(null);
-			jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			jf.setVisible(true);
-			jf.pack();
-			
-		}
-		else {
-			final JFileChooser fc = new JFileChooser();
-			fc.addChoosableFileFilter(new ImageFilter());
-			fc.setAcceptAllFileFilterUsed(false);
-			int returnVal = fc.showOpenDialog(null);
-			
-			if(returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = fc.getSelectedFile();
-				
-				try {
-					immy = ImageIO.read(file);
-					//Path of the File to recover the attributes of it
-					path = file.getAbsolutePath();
-					Path fpath = Paths.get(path);
-					BasicFileAttributes attr = Files.readAttributes(fpath, BasicFileAttributes.class);
-					name = getName(file);
-					extension = getExtension(file);
-					dimension = attr.size();
-					creation = attr.creationTime();
-					lastaccess = attr.lastAccessTime();
-					lastmodification = attr.lastModifiedTime();
-					System.out.println("File Path: " + path);
-					System.out.println("File Name : " + name);
-					System.out.println("File Extension: " + extension);
-					System.out.println("Dimension: " + dimension + " bytes");
-					System.out.println("Creation Time: " + creation);
-					System.out.println("Last Access Time: " + lastaccess);
-					System.out.println("Last Modification Time: " + lastmodification);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					//e.printStackTrace();
-					System.out.println("Immagine non caricata correttamente");
-				}
-				
-				ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
-				picLabel.setIcon(img);
-				picLabel.setVisible(true);
+		while(notLoaded) {
+			if(fromweb) {
+				AddWeb window = new AddWeb();
+				immy = window.getPic();
+				notLoaded = false;
 			}
-			else
-				System.out.println("Immagine non selezionata");
+			//If the image is taken locally
+			else {
+				final JFileChooser fc = new JFileChooser();
+				fc.addChoosableFileFilter(new ImageFilter());
+				fc.setAcceptAllFileFilterUsed(false);
+				int returnVal = fc.showOpenDialog(null);
+				
+				if(returnVal == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+					
+					try {
+						immy = ImageIO.read(file);
+						//Path of the File to recover the attributes of it
+						path = file.getAbsolutePath();
+						Path fpath = Paths.get(path);
+						BasicFileAttributes attr = Files.readAttributes(fpath, BasicFileAttributes.class);
+						name = getName(file);
+						extension = getExtension(file);
+						dimension = attr.size();
+						creation = attr.creationTime();
+						lastaccess = attr.lastAccessTime();
+						lastmodification = attr.lastModifiedTime();
+						System.out.println("File Path: " + path);
+						System.out.println("File Name : " + name);
+						System.out.println("File Extension: " + extension);
+						System.out.println("Dimension: " + dimension + " bytes");
+						System.out.println("Creation Time: " + creation);
+						System.out.println("Last Access Time: " + lastaccess);
+						System.out.println("Last Modification Time: " + lastmodification);
+						notLoaded = false;
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						System.out.println("Immagine non caricata correttamente");
+					}
+				}
+				else
+					System.out.println("Immagine non selezionata");
+			}
 		}
+		ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
+		picLabel.setIcon(img);
+		picLabel.setVisible(true);
 		return picLabel;
-	}
-//	public void actionPerformed(JPanel jp, ActionEvent e) {
-//		// TODO Auto-generated method stub
-//		if(e.getSource() == jp.get) {
-//			
-//		}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-		
-	}
+	}	
+}
 
