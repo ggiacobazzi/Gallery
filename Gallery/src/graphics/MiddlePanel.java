@@ -28,7 +28,6 @@ public class MiddlePanel extends JPanel {
 		this.setMinimumSize(new Dimension(400,400));
 		this.setPreferredSize(new Dimension(1100, 750));
 		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		//GridBagConstraints gbc = new GridBagConstraints();
 	}
 
 	public int getImgcurr() {
