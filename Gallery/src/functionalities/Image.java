@@ -68,14 +68,13 @@ public class Image {
 		BufferedImage immy = null;
 		JLabel picLabel = new JLabel();
 		picLabel.setSize(160, 108);  //240, 160
-		Boolean notLoaded = true;
+		Boolean loaded = false;
 		
 		//If the image is taken from an url
-		while(notLoaded) {
 			if(fromweb) {
 				AddWeb window = new AddWeb();
 				immy = window.getPic();
-				notLoaded = false;
+				loaded = true;
 			}
 			//If the image is taken locally
 			else {
@@ -106,7 +105,7 @@ public class Image {
 						System.out.println("Creation Time: " + creation);
 						System.out.println("Last Access Time: " + lastaccess);
 						System.out.println("Last Modification Time: " + lastmodification);
-						notLoaded = false;
+						loaded = true;
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -116,11 +115,14 @@ public class Image {
 				else
 					System.out.println("Immagine non selezionata");
 			}
+		if(loaded) {
+			ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
+			picLabel.setIcon(img);
+			picLabel.setVisible(true);
+			return picLabel;
 		}
-		ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
-		picLabel.setIcon(img);
-		picLabel.setVisible(true);
-		return picLabel;
+		else
+			return null;
 	}	
 }
 
