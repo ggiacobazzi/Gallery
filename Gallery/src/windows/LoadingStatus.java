@@ -16,35 +16,32 @@ public class LoadingStatus {
 	
 	private JFrame window;
 	
-	public LoadingStatus(Boolean status) {
+	public LoadingStatus(Boolean status, String str) {
+		this.window = new JFrame();
+		window.setLayout(new GridBagLayout());
+		window.setSize(new Dimension(500, 100));
+		window.setVisible(true);
+		window.setLocationRelativeTo(null);
+		//window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
 		if(status) {
 //			//JDialog success = new JDialog(window, "Success", true);
-			this.window = new JFrame("Load an image");
-			window.setLayout(new GridBagLayout());
-			window.setSize(new Dimension(500, 100));
-			window.setVisible(true);
-			window.setLocationRelativeTo(null);
-			//window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
-			//SwingUtilities.getWindowAncestor(super.getClass()).dispose();
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			JLabel txt = new JLabel("Immagine caricata correttamente da URL");
+			this.window.setTitle("Success");
+			JLabel txt = new JLabel(str);
 			window.add(txt);
 		}
 		else {
-			JFrame window = new JFrame("Error");
-			window.setLayout(new GridBagLayout());
-			window.setSize(new Dimension(500, 100));
-			window.setVisible(true);
-			window.setLocationRelativeTo(null);
-			//window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
-			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			this.window.setTitle("Error");
 			//SwingUtilities.getWindowAncestor(window).dispose();
-			JLabel txt = new JLabel("URL non valido");
+			JLabel txt = new JLabel(str);
 			window.add(txt);
-			System.out.println("URL non valido");
 		}
 	}
-	
+	 /**
+	  * TODO passa da success a imagefunctions con un onclick
+	  * 
+	  */
 	public void closeJFrame() {
 	}
 }
