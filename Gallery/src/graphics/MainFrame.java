@@ -71,7 +71,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		JScrollPane jsp = new JScrollPane(ip, 
 			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		this.p2.add(ip);
+		this.p2.add(jsp);
 //		jsp.getVerticalScrollBar().setPreferredSize(new Dimension(10,0));
 //		jsp.getHorizontalScrollBar().setPreferredSize(new Dimension(0,10));
 		SwingUtilities.updateComponentTreeUI(this);
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.gridheight = 1;
-		this.container.add(jsp, gbc);
+		this.container.add(p2, gbc);
 		//this.container.add(p2,gbc);
 		
 		//Lower Panel
