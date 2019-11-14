@@ -63,15 +63,14 @@ public class AddWeb extends JFrame implements ActionListener {
 			try {
 				URL url = new URL(urlstring);
 				this.setPic(ImageIO.read(url));
-				System.out.println("Letto URL!");
 			} catch (MalformedURLException e1) {
-				LoadingStatus ls = new LoadingStatus(false);
+				LoadingStatus ls = new LoadingStatus(false, "URL non valido");
 				e1.printStackTrace();
 				return;
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			LoadingStatus ls = new LoadingStatus(true);
+			LoadingStatus ls = new LoadingStatus(true, "Immagine caricata correttamente da URL");
 		}
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}

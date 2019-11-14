@@ -25,7 +25,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import windows.AddWeb;
+import windows.*;
 
 public class Image {
 
@@ -105,15 +105,17 @@ public class Image {
 						System.out.println("Creation Time: " + creation);
 						System.out.println("Last Access Time: " + lastaccess);
 						System.out.println("Last Modification Time: " + lastmodification);
+						LoadingStatus ls = new LoadingStatus(true, "Immagine caricata correttamente");
 						loaded = true;
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-						System.out.println("Immagine non caricata correttamente");
+						LoadingStatus ls = new LoadingStatus(false, "Immagine non caricata correttamente");
 					}
 				}
-				else
-					System.out.println("Immagine non selezionata");
+				else {
+					LoadingStatus ls = new LoadingStatus(false, "Immagine non selezionata");
+				}
 			}
 		if(loaded) {
 			ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
