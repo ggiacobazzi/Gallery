@@ -1,36 +1,43 @@
 package functionalities;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 
-import windows.AddWeb;
+import windows.*;
 
-public class ImageFunctions implements ActionListener{
-
+public class ImageFunctions{
+	//@SuppressWarnings("unused")
 	
+	/**
+	 * method used to load an image. 
+	 * @param fromweb boolean used to decide the way to load the image (from web or locally)
+	 * @return returns a JLabel that will be added to the panel
+	 */
 	public static JLabel loadImage(Boolean fromweb) {
 		BufferedImage immy = null;
 		JLabel picLabel = new JLabel();
 		picLabel.setSize(160, 108);  //240, 160
-		Boolean loaded = false;
 		
 		//If the image is taken from an url
 			if(fromweb) {
 				AddWeb window = new AddWeb();
 				immy = window.getPic();
-				loaded = true;
+				if(window.getLoaded()) {
+					System.out.println("leavanny");
+					return displayImage(immy, picLabel);
+				}
 			}
 			//If the image is taken locally
 			else {
@@ -49,43 +56,67 @@ public class ImageFunctions implements ActionListener{
 //						Path fpath = Paths.get(path);
 //						BasicFileAttributes attr = Files.readAttributes(fpath, BasicFileAttributes.class);
 //						name = getName(file);
-//						extension = getExtension(file);
+//						String extension = Image.getExtension(file);
 //						dimension = attr.size();
 //						creation = attr.creationTime();
 //						lastaccess = attr.lastAccessTime();
 //						lastmodification = attr.lastModifiedTime();
 //						System.out.println("File Path: " + path);
 //						System.out.println("File Name : " + name);
-//						System.out.println("File Extension: " + extension);
+//						System.out.println("File Extension:" + extension);
 //						System.out.println("Dimension: " + dimension + " bytes");
 //						System.out.println("Creation Time: " + creation);
 //						System.out.println("Last Access Time: " + lastaccess);
 //						System.out.println("Last Modification Time: " + lastmodification);
-						loaded = true;
+						Status s = new Status(true, "Immagine caricata correttamente");
+						return displayImage(immy, picLabel);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
-						System.out.println("Immagine non caricata correttamente");
+						Status s = new Status(false, "Immagine non caricata correttamente");
 					}
 				}
-				else
-					System.out.println("Immagine non selezionata");
+				else {
+					Status s = new Status(false, "Immagine non selezionata");
+				}
 			}
-		if(loaded) {
-			ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
-			picLabel.setIcon(img);
-			picLabel.setVisible(true);
-			return picLabel;
-		}
-		else
-			return null;
+		return picLabel;
 	}	
+	/**
+	 * method used to display the image loaded
+	 * @param immy image used to create the label
+	 * @param picLabel label that is added to the panel
+	 * @return
+	 */
+	public static JLabel displayImage(BufferedImage immy, JLabel picLabel) {
+		ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
+		picLabel.setIcon(img);
+		picLabel.setVisible(true);
+		return picLabel;
+	}
 	
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	/**
+	 * method used to save a file locally from a url
+	 * @param url url of the image 
+	 * @return
+	 */
+	public static String saveFromWeb(URL url) {
+		String newstr = "new_file";
+		InputStream in;
+		try {
+			in = new BufferedInputStream(url.openStream());
+			OutputStream out = new BufferedOutputStream(new FileOutputStream(newstr));
+
+			for ( int i; (i = in.read()) != -1; ) {
+			    out.write(i);
+			}
+			in.close();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return newstr;
 	}
 
 }
