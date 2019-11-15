@@ -7,7 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -18,6 +24,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import functionalities.ImageFunctions;
+
 public class AddWeb extends JFrame implements ActionListener {
 
 	/**
@@ -27,6 +35,7 @@ public class AddWeb extends JFrame implements ActionListener {
 	private String urlstring;
 	private JTextField box;
 	private BufferedImage pic;
+	private Boolean loaded;
 	/**
 	 * Class used to create a window when the user tries to add an image from an url
 	 * @param pic
@@ -52,33 +61,43 @@ public class AddWeb extends JFrame implements ActionListener {
 		//jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jf.setVisible(true);
 		jf.pack();
+		this.loaded = false;
 	}
 	/**
 	 * ActionListener 
 	 */
 	public void actionPerformed(ActionEvent e){
 		String choice = e.getActionCommand();
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		if(choice == "Enter") {
 			this.urlstring = box.getText();
 			try {
 				URL url = new URL(urlstring);
 				this.setPic(ImageIO.read(url));
+				//this.setPic(ImageIO.read(new File((ImageFunctions.saveFromWeb(url)))));
+				this.loaded = true;
 			} catch (MalformedURLException e1) {
-				LoadingStatus ls = new LoadingStatus(false, "URL non valido");
+				Status s = new Status(false, "URL non valido");
 				e1.printStackTrace();
 				return;
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			LoadingStatus ls = new LoadingStatus(true, "Immagine caricata correttamente da URL");
+			Status s = new Status(true, "Immagine caricata correttamente da URL");
+			
 		}
-		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 	public BufferedImage getPic() {
 		return pic;
 	}
 	public void setPic(BufferedImage pic) {
 		this.pic = pic;
+	}
+	public Boolean getLoaded() {
+		return loaded;
+	}
+	public void setLoaded(Boolean loaded) {
+		this.loaded = loaded;
 	}
 	
 	
