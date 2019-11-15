@@ -7,11 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.*;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -72,17 +69,23 @@ public class LowerPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == add) {
-			ip.add(Image.loadImage(false));
-			//ip.add(picLabel);
-			SwingUtilities.updateComponentTreeUI(ip);
-			SwingUtilities.updateComponentTreeUI(p2);
-			System.out.println("ciao");
+			if(ip.add(ImageFunctions.loadImage(false))!=null) {	
+				//ip.add(picLabel);
+				SwingUtilities.updateComponentTreeUI(ip);
+				SwingUtilities.updateComponentTreeUI(p2);
+				System.out.println("ciao");
+			}
+			else{
+				System.out.println("Ciaoaidhnk madsnjk");
+			}
 			//ip.revalidate();
 		}
 		else if(e.getSource() == addweb) {
-			ip.add(Image.loadImage(true));
-			SwingUtilities.updateComponentTreeUI(ip);
-			ip.revalidate();
+			if(ip.add(ImageFunctions.loadImage(true))!=null) {
+				SwingUtilities.updateComponentTreeUI(ip);
+				SwingUtilities.updateComponentTreeUI(p2);
+				//ip.revalidate();
+			}
 		}
 		
 		else if(e.getSource() == remove) {
