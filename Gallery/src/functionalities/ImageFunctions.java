@@ -33,10 +33,11 @@ public class ImageFunctions{
 		//If the image is taken from an url
 			if(fromweb) {
 				AddWeb window = new AddWeb();
-				immy = window.getPic();
+				Image newimage = new Image(window.getPic(), window.getFile());
+				//immy = window.getPic();
 				if(window.getLoaded()) {
 					System.out.println("leavanny");
-					return displayImage(immy, picLabel);
+					return displayImage(newimage.getRawimage(), picLabel);
 				}
 			}
 			//If the image is taken locally
@@ -51,25 +52,9 @@ public class ImageFunctions{
 					
 					try {
 						immy = ImageIO.read(file);
-//						//Path of the File to recover the attributes of it
-//						path = file.getAbsolutePath();
-//						Path fpath = Paths.get(path);
-//						BasicFileAttributes attr = Files.readAttributes(fpath, BasicFileAttributes.class);
-//						name = getName(file);
-//						String extension = Image.getExtension(file);
-//						dimension = attr.size();
-//						creation = attr.creationTime();
-//						lastaccess = attr.lastAccessTime();
-//						lastmodification = attr.lastModifiedTime();
-//						System.out.println("File Path: " + path);
-//						System.out.println("File Name : " + name);
-//						System.out.println("File Extension:" + extension);
-//						System.out.println("Dimension: " + dimension + " bytes");
-//						System.out.println("Creation Time: " + creation);
-//						System.out.println("Last Access Time: " + lastaccess);
-//						System.out.println("Last Modification Time: " + lastmodification);
+						Image newimage = new Image(immy, file);
 						Status s = new Status(true, "Immagine caricata correttamente");
-						return displayImage(immy, picLabel);
+						return displayImage(newimage.getRawimage(), picLabel);
 					} catch (IOException e) {
 						e.printStackTrace();
 						Status s = new Status(false, "Immagine non caricata correttamente");

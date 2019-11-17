@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import functionalities.Image;
 import functionalities.ImageFunctions;
 
 public class AddWeb extends JFrame implements ActionListener {
@@ -36,6 +37,8 @@ public class AddWeb extends JFrame implements ActionListener {
 	private JTextField box;
 	private BufferedImage pic;
 	private Boolean loaded;
+	private File downloadedfile;
+	
 	/**
 	 * Class used to create a window when the user tries to add an image from an url
 	 * @param pic
@@ -73,8 +76,11 @@ public class AddWeb extends JFrame implements ActionListener {
 			this.urlstring = box.getText();
 			try {
 				URL url = new URL(urlstring);
-				this.setPic(ImageIO.read(url));
-				//this.setPic(ImageIO.read(new File((ImageFunctions.saveFromWeb(url)))));
+				//this.setPic(ImageIO.read(url));
+				//Image newimage = new Image(, ImageFunctions.saveFromWeb(url));
+				//this.downloadedfile = (new File((ImageFunctions.saveFromWeb(url))));
+				setFile(ImageFunctions.saveFromWeb(url));
+				this.setPic(ImageIO.read(getFile()));
 				this.loaded = true;
 			} catch (MalformedURLException e1) {
 				Status s = new Status(false, "URL non valido");
@@ -99,6 +105,13 @@ public class AddWeb extends JFrame implements ActionListener {
 	public void setLoaded(Boolean loaded) {
 		this.loaded = loaded;
 	}
+	public void setFile(String str) {
+		this.downloadedfile = new File(str);
+	}
+	public File getFile(){
+		return this.downloadedfile;
+	}
+	
 	
 	
 
