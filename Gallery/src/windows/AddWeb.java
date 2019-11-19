@@ -76,12 +76,18 @@ public class AddWeb extends JFrame implements ActionListener {
 			this.urlstring = box.getText();
 			try {
 				URL url = new URL(urlstring);
-				//this.setPic(ImageIO.read(url));
+				BufferedImage i = ImageIO.read(url);
+				if(i != null) {
+					System.out.println(i.getHeight() + " " + i.getWidth());
+				}
+					
+				this.setPic(i);
 				//Image newimage = new Image(, ImageFunctions.saveFromWeb(url));
 				//this.downloadedfile = (new File((ImageFunctions.saveFromWeb(url))));
-				setFile(ImageFunctions.saveFromWeb(url));
-				this.setPic(ImageIO.read(getFile()));
+				//setFile(ImageFunctions.saveFromWeb(url));
+				//this.setPic(ImageIO.read(getFile()));
 				this.loaded = true;
+				System.out.println(this.getLoaded());
 			} catch (MalformedURLException e1) {
 				Status s = new Status(false, "URL non valido");
 				e1.printStackTrace();
@@ -100,7 +106,7 @@ public class AddWeb extends JFrame implements ActionListener {
 		this.pic = pic;
 	}
 	public Boolean getLoaded() {
-		return loaded;
+		return this.loaded;
 	}
 	public void setLoaded(Boolean loaded) {
 		this.loaded = loaded;

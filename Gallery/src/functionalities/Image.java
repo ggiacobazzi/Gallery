@@ -25,17 +25,20 @@ public class Image {
 	private static FileTime lastmodification;
 	
    //TODO: fix absolutepath@images_added_from_web;
-	public Image(BufferedImage img, File rawfile) {
+	public Image(BufferedImage img, File rawfile, Boolean web) {
 		try {
 			Image.setRawimage(img);
-			Image.setPath(rawfile.getAbsolutePath());
-			Image.setAttr(Files.readAttributes(Paths.get(Image.getPath()), BasicFileAttributes.class));
+			if(!web) {
+				Image.setPath(rawfile.getAbsolutePath());
+				Image.setAttr(Files.readAttributes(Paths.get(Image.getPath()), BasicFileAttributes.class));
+				Image.setDimension(Image.getAttr().size());
+				Image.setCreation(Image.getAttr().creationTime());
+				Image.setLastaccess(Image.getAttr().lastAccessTime());
+				Image.setLastmodification(Image.getAttr().lastModifiedTime());
+			}
 			Image.setName(getName(rawfile));
 			Image.setExtension(getExtension(rawfile));
-			Image.setDimension(Image.getAttr().size());
-			Image.setCreation(Image.getAttr().creationTime());
-			Image.setLastaccess(Image.getAttr().lastAccessTime());
-			Image.setLastmodification(Image.getAttr().lastModifiedTime());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			//e.printStackTrace();

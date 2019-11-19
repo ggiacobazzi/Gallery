@@ -10,13 +10,14 @@ public class PhotoAlbum {
 	private LocalDateTime dataOfCreation;
 	private String name;
 	private String description;
+	private ArrayList<Image> defCat;
 	
 	/**
 	 * Default constructor used when it's called without values
 	 */
 	
 	public PhotoAlbum() {
-		ArrayList<Image> defCat = new ArrayList<Image>();
+		this.defCat= new ArrayList<Image>();
 		setMaxImages(0);
 		setDataOfCreation(java.time.LocalDateTime.now());
 		setName("placeholder");
@@ -29,7 +30,8 @@ public class PhotoAlbum {
 	 * @param desc description of the instance of Category
 	 */
 	public PhotoAlbum(String name, String desc) {
-		ArrayList<Image> cat = new ArrayList<Image>();
+		this.defCat= new ArrayList<Image>();
+		//ArrayList<Image> cat = new ArrayList<Image>();
 		setMaxImages(0);
 		setDataOfCreation(java.time.LocalDateTime.now());
 		setName(name);
