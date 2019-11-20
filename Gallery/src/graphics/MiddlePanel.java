@@ -48,5 +48,13 @@ public class MiddlePanel extends JPanel {
 	public void setImgmax(int imgmax) {
 		this.imgmax = imgmax;
 	}
+
+	public PhotoAlbum getCurrentCategory() {
+		return currentCategory;
+	}
+
+	public void setCurrentCategory(PhotoAlbum currentCategory) {
+		this.currentCategory = currentCategory;
+	}
 	
 }
