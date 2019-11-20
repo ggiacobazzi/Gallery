@@ -37,10 +37,4 @@ public class Status {
 			window.add(txt);
 		}
 	}
-	 /**
-	  * TODO passa da success a imagefunctions con un onclick
-	  * 
-	  */
-	public void closeJFrame() {
-	}
 }
