@@ -8,15 +8,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.System.Logger;
 import java.net.URL;
-import java.net.URLConnection;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 
+import graphics.LowerPanel;
 import windows.*;
 
 public class ImageFunctions{
@@ -25,27 +24,19 @@ public class ImageFunctions{
 	/**
 	 * method used to load an image. 
 	 * @param fromweb boolean used to decide the way to load the image (from web or locally)
-	 * @return returns a JLabel that will be added to the panel
+	 * @param lp reference to the panel that contains the panel storing the images
 	 */
-	public static JLabel loadImage(Boolean fromweb) {
-		BufferedImage immy = null;
-		JLabel picLabel = new JLabel();
-		picLabel.setSize(160, 108);  //240, 160
+	public static void loadImage(Boolean fromweb, LowerPanel lp) {
 		
-		//If the image is taken from an url
+		
+			//If the image is taken from an url
 			if(fromweb) {
-				AddWeb window = new AddWeb();
-				System.out.println("preimmagine");
-				Image newimage = new Image(window.getPic(), window.getFile(), true);
-				//immy = window.getPic();
-				System.out.println("pre-caricamenteo web");
-				if(window.getLoaded()==true) {
-					System.out.println("leavanny");
-					return displayImage(newimage.getRawimage(), picLabel);
-				}
+				AddWeb window = new AddWeb(lp);
+				//Image newimage = new Image(window.getPic(), window.getFile(), true);
 			}
 			//If the image is taken locally
 			else {
+				BufferedImage immy = null;
 				final JFileChooser fc = new JFileChooser();
 				fc.addChoosableFileFilter(new ImageFilter());
 				fc.setAcceptAllFileFilterUsed(false);
@@ -57,8 +48,10 @@ public class ImageFunctions{
 					try {
 						immy = ImageIO.read(file);
 						Image newimage = new Image(immy, file, false);
+						//lp.getP2().getCurrentCategory().getDefCat().add(newimage);
 						Status s = new Status(true, "Immagine caricata correttamente");
-						return displayImage(newimage.getRawimage(), picLabel);
+						lp.getImagePanel().add(displayImage(newimage.getRawimage()));
+						SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
 					} catch (IOException e) {
 						e.printStackTrace();
 						Status s = new Status(false, "Immagine non caricata correttamente");
@@ -68,15 +61,17 @@ public class ImageFunctions{
 					Status s = new Status(false, "Immagine non selezionata");
 				}
 			}
-		return picLabel;
 	}	
+	
 	/**
 	 * method used to display the image loaded
 	 * @param immy image used to create the label
 	 * @param picLabel label that is added to the panel
 	 * @return
 	 */
-	public static JLabel displayImage(BufferedImage immy, JLabel picLabel) {
+	public static JLabel displayImage(BufferedImage immy) {
+		JLabel picLabel = new JLabel();
+		picLabel.setSize(160, 108);  //240, 160
 		ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
 		picLabel.setIcon(img);
 		picLabel.setVisible(true);
@@ -108,7 +103,6 @@ public class ImageFunctions{
 		return newstr;
 	}
 	
-	public 
 //	public static void downloadFromWeb(String search, String path) {
 //		
 //		// This will get input data from the server
