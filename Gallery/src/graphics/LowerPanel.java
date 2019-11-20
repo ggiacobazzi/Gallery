@@ -10,7 +10,6 @@ import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 /**
  * Panel that contains the main buttons for the application
@@ -31,8 +30,8 @@ public class LowerPanel extends JPanel implements ActionListener {
 	private ImagePanel ip;
 	public LowerPanel(Color c, LeftPanel p1, MiddlePanel p2, ImagePanel ip, JFrame jf) {
 		this.setMinimumSize(new Dimension(600,100));
-		this.p2 = p2;
-		this.ip = ip;
+		this.setP2(p2);
+		this.setImagePanel(ip);
 		this.CreatePanel(c);
 	}
 	
@@ -69,23 +68,18 @@ public class LowerPanel extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getSource() == add) {
-			if(ip.add(ImageFunctions.loadImage(false))!=null) {	
+			ImageFunctions.loadImage(false, this);
 				//ip.add(picLabel);
-				SwingUtilities.updateComponentTreeUI(ip);
-				SwingUtilities.updateComponentTreeUI(p2);
+				//SwingUtilities.updateComponentTreeUI(ip);
+				//SwingUtilities.updateComponentTreeUI(p2);
 				System.out.println("ciao");
-			}
-			else{
-				System.out.println("Ciaoaidhnk madsnjk");
-			}
-			//ip.revalidate();
 		}
+			//ip.revalidate();
 		else if(e.getSource() == addweb) {
-			if(ip.add(ImageFunctions.loadImage(true))!=null) {
-				SwingUtilities.updateComponentTreeUI(ip);
-				SwingUtilities.updateComponentTreeUI(p2);
+			ImageFunctions.loadImage(true, this);
+//				SwingUtilities.updateComponentTreeUI(ip);
+//				SwingUtilities.updateComponentTreeUI(p2);
 				//ip.revalidate();
-			}
 		}
 		
 		else if(e.getSource() == remove) {
@@ -94,6 +88,22 @@ public class LowerPanel extends JPanel implements ActionListener {
 		else if(e.getSource() == next) {
 			
 		}
+	}
+	
+	public MiddlePanel getP2() {
+		return p2;
+	}
+
+	public void setP2(MiddlePanel p2) {
+		this.p2 = p2;
+	}
+
+	public ImagePanel getImagePanel() {
+		return this.ip;
+	}
+	
+	public void setImagePanel(ImagePanel ip) {
+		this.ip = ip;
 	}
 	
 }
