@@ -7,13 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -23,9 +18,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
-import functionalities.Image;
 import functionalities.ImageFunctions;
+import graphics.LowerPanel;
 
 public class AddWeb extends JFrame implements ActionListener {
 
@@ -37,13 +33,14 @@ public class AddWeb extends JFrame implements ActionListener {
 	private JTextField box;
 	private BufferedImage pic;
 	private Boolean loaded;
+	private LowerPanel lp;
 	private File downloadedfile;
 	
 	/**
 	 * Class used to create a window when the user tries to add an image from an url
 	 * @param pic
 	 */
-	public AddWeb() {
+	public AddWeb(LowerPanel lp) {
 		JFrame jf = new JFrame("Add Image from web");
 		jf.setSize(new Dimension(500, 100));
 		jf.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
@@ -65,10 +62,12 @@ public class AddWeb extends JFrame implements ActionListener {
 		jf.setVisible(true);
 		jf.pack();
 		this.loaded = false;
+		this.lp = lp;
 	}
 	/**
 	 * ActionListener 
 	 */
+	@SuppressWarnings("unused")
 	public void actionPerformed(ActionEvent e){
 		String choice = e.getActionCommand();
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -76,18 +75,8 @@ public class AddWeb extends JFrame implements ActionListener {
 			this.urlstring = box.getText();
 			try {
 				URL url = new URL(urlstring);
-				BufferedImage i = ImageIO.read(url);
-				if(i != null) {
-					System.out.println(i.getHeight() + " " + i.getWidth());
-				}
-					
-				this.setPic(i);
-				//Image newimage = new Image(, ImageFunctions.saveFromWeb(url));
-				//this.downloadedfile = (new File((ImageFunctions.saveFromWeb(url))));
-				//setFile(ImageFunctions.saveFromWeb(url));
-				//this.setPic(ImageIO.read(getFile()));
-				this.loaded = true;
-				System.out.println(this.getLoaded());
+				BufferedImage img = ImageIO.read(url);
+				this.displayImageFromWeb(img, lp);
 			} catch (MalformedURLException e1) {
 				Status s = new Status(false, "URL non valido");
 				e1.printStackTrace();
@@ -96,8 +85,16 @@ public class AddWeb extends JFrame implements ActionListener {
 				e1.printStackTrace();
 			}
 			Status s = new Status(true, "Immagine caricata correttamente da URL");
-			
 		}
+	}
+	/**
+	 * method used to display an Image loaded from an url.
+	 * @param img image that will be added to the panel
+	 * @param lp reference to the panel where the image will be loaded
+	 */
+	public void displayImageFromWeb(BufferedImage img, LowerPanel lp) {
+		lp.getImagePanel().add(ImageFunctions.displayImage(img));
+		SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
 	}
 	public BufferedImage getPic() {
 		return pic;
