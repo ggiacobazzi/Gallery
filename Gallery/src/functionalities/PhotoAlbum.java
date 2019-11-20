@@ -17,7 +17,7 @@ public class PhotoAlbum {
 	 */
 	
 	public PhotoAlbum() {
-		this.defCat= new ArrayList<Image>();
+		this.setDefCat(new ArrayList<Image>());
 		setMaxImages(0);
 		setDataOfCreation(java.time.LocalDateTime.now());
 		setName("placeholder");
@@ -30,7 +30,7 @@ public class PhotoAlbum {
 	 * @param desc description of the instance of Category
 	 */
 	public PhotoAlbum(String name, String desc) {
-		this.defCat= new ArrayList<Image>();
+		this.setDefCat(new ArrayList<Image>());
 		//ArrayList<Image> cat = new ArrayList<Image>();
 		setMaxImages(0);
 		setDataOfCreation(java.time.LocalDateTime.now());
@@ -61,5 +61,13 @@ public class PhotoAlbum {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ArrayList<Image> getDefCat() {
+		return defCat;
+	}
+
+	public void setDefCat(ArrayList<Image> defCat) {
+		this.defCat = defCat;
 	}
 }
