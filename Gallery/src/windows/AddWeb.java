@@ -93,8 +93,10 @@ public class AddWeb extends JFrame implements ActionListener {
 	 * @param lp reference to the panel where the image will be loaded
 	 */
 	public void displayImageFromWeb(BufferedImage img, LowerPanel lp) {
+		//for(int i=0; i<50; i++) {
 		lp.getImagePanel().add(ImageFunctions.displayImage(img));
 		SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
+		//}
 	}
 	public BufferedImage getPic() {
 		return pic;
