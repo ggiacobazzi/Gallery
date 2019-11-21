@@ -3,10 +3,13 @@ package graphics;
 import functionalities.*;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +31,7 @@ public class LowerPanel extends JPanel implements ActionListener {
 	private JButton next, addweb, add, remove;
 	private MiddlePanel p2;
 	private ImagePanel ip;
+	
 	public LowerPanel(Color c, LeftPanel p1, MiddlePanel p2, ImagePanel ip, JFrame jf) {
 		this.setMinimumSize(new Dimension(600,100));
 		this.setP2(p2);
@@ -38,26 +42,39 @@ public class LowerPanel extends JPanel implements ActionListener {
 	private void CreatePanel(Color c) {
 		this.setBackground(c);
 		
-		this.setLayout(new GridBagLayout());
+		this.setLayout(new FlowLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.insets = new Insets(6, 6, 6, 6);
 		
-		this.add((addweb = new JButton("Add from url")), gbc);
-		addweb.setSize(new Dimension(700, 400));
-		addweb.setPreferredSize(new Dimension(700, 400));
-		addweb.addActionListener(this);
+		String addwebicon = "defaults" + File.separator + "at-sign.icon.png";
+		this.addweb = new Button("Add from url", addwebicon);
+		this.add(this.addweb);
+		//this.add((addweb = new JButton("Add from url")));
+		//this.add((addweb = new JButton("Add from url")), gbc);
+		//addweb.setSize(new Dimension(100, 100));
+		//addweb.setPreferredSize(new Dimension(100, 100));
+		this.addweb.addActionListener(this);
 		gbc.gridx++;
-		this.add((add = new JButton("Add")), gbc);
-		add.setPreferredSize(new Dimension(400, 400));
+		String addicon = "defaults" + File.separator + "plus-icon.png";
+		this.add = new Button("Add", addicon);
+		this.add(this.add);
+		//this.add((add = new JButton("Add")));
+		//this.add((add = new JButton("Add")), gbc);
+		//add.setPreferredSize(new Dimension(100, 100));
 		add.addActionListener(this);
 		gbc.gridx++;
-		this.add((remove = new JButton("Remove")), gbc);
-		remove.setPreferredSize(new Dimension(400, 400));
+		String remove = "defaults" + File.separator + "folder-blue-icon.png";
+		this.remove = new Button("Remove", remove);
+		this.add(this.remove);
+		//this.add((remove = new JButton("Remove")));
+		//this.add((remove = new JButton("Remove")), gbc);
+		//remove.setPreferredSize(new Dimension(100, 100));
 		gbc.gridx++;
-		this.add((next = new JButton("Next")), gbc);
-		next.setPreferredSize(new Dimension(400, 400));
+		this.add((next = new JButton("Next")));
+		//this.add((next = new JButton("Next")), gbc);
+		next.setPreferredSize(new Dimension(100, 100));
 	}
 	
 	/**
