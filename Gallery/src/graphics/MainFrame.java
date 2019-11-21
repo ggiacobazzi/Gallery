@@ -70,7 +70,10 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.ip = new ImagePanel(p2);
 		JScrollPane jsp = new JScrollPane(ip, 
 			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		jsp.setMinimumSize(new Dimension(p2.getMinimumSize()));
+		jsp.setPreferredSize(new Dimension(p2.getPreferredSize()));
+		jsp.setVisible(true);
 		this.p2.add(jsp);
 //		jsp.getVerticalScrollBar().setPreferredSize(new Dimension(10,0));
 //		jsp.getHorizontalScrollBar().setPreferredSize(new Dimension(0,10));
