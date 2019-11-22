@@ -1,5 +1,7 @@
 package graphics;
 
+import functionalities.Categories;
+
 /**This class initializes the main frame, containing all the panels
  * 
  * @author gabbb

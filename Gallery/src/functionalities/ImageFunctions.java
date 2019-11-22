@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import graphics.Button;
 import graphics.LowerPanel;
 import windows.*;
 
@@ -24,15 +25,14 @@ public class ImageFunctions{
 	/**
 	 * method used to load an image. 
 	 * @param fromweb boolean used to decide the way to load the image (from web or locally)
-	 * @param lp reference to the panel that contains the panel storing the images
+	 * @param lowerPanel reference to the panel that contains the panel storing the images
 	 */
-	public static void loadImage(Boolean fromweb, LowerPanel lp) {
+	public static void loadImage(Boolean fromweb, LowerPanel lowerPanel) {
 		
 		
 			//If the image is taken from an url
 			if(fromweb) {
-				AddWeb window = new AddWeb(lp);
-				//Image newimage = new Image(window.getPic(), window.getFile(), true);
+				AddWeb window = new AddWeb(lowerPanel);
 			}
 			//If the image is taken locally
 			else {
@@ -47,11 +47,11 @@ public class ImageFunctions{
 					
 					try {
 						immy = ImageIO.read(file);
-						Image newimage = new Image(immy, file, false);
-						//lp.getP2().getCurrentCategory().getDefCat().add(newimage);
+						Image newimage = new Image(immy, file);
+						lowerPanel.getP2().getCurrentCategory().getDefCat().add(newimage);
 						Status s = new Status(true, "Immagine caricata correttamente");
-						lp.getImagePanel().add(displayImage(newimage.getRawimage()));
-						SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
+						lowerPanel.getImagePanel().add(displayImage(newimage.getRawimage()));
+						SwingUtilities.updateComponentTreeUI(lowerPanel.getImagePanel());
 					} catch (IOException e) {
 						e.printStackTrace();
 						Status s = new Status(false, "Immagine non caricata correttamente");
