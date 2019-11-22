@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+import functionalities.Image;
 import functionalities.ImageFunctions;
 import graphics.LowerPanel;
 
@@ -40,7 +41,7 @@ public class AddWeb extends JFrame implements ActionListener {
 	 * Class used to create a window when the user tries to add an image from an url
 	 * @param pic
 	 */
-	public AddWeb(LowerPanel lp) {
+	public AddWeb(LowerPanel lowerPanel) {
 		JFrame jf = new JFrame("Add Image from web");
 		jf.setSize(new Dimension(500, 100));
 		jf.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
@@ -62,7 +63,7 @@ public class AddWeb extends JFrame implements ActionListener {
 		jf.setVisible(true);
 		jf.pack();
 		this.loaded = false;
-		this.lp = lp;
+		this.lp = lowerPanel;
 	}
 	/**
 	 * ActionListener 
@@ -75,8 +76,11 @@ public class AddWeb extends JFrame implements ActionListener {
 			this.urlstring = box.getText();
 			try {
 				URL url = new URL(urlstring);
-				BufferedImage img = ImageIO.read(url);
-				this.displayImageFromWeb(img, lp);
+				Image newimage = new Image(ImageIO.read(url));
+				lp.getP2().getCurrentCategory().getDefCat().add(newimage);
+				System.out.println("Elementi nella lista: " + lp.getP2().getCurrentCategory().getDefCat().size());
+				//BufferedImage img = ImageIO.read(url);
+				this.displayImageFromWeb(newimage.getRawimage(), lp);
 			} catch (MalformedURLException e1) {
 				Status s = new Status(false, "URL non valido");
 				e1.printStackTrace();
@@ -93,10 +97,10 @@ public class AddWeb extends JFrame implements ActionListener {
 	 * @param lp reference to the panel where the image will be loaded
 	 */
 	public void displayImageFromWeb(BufferedImage img, LowerPanel lp) {
-		//for(int i=0; i<50; i++) {
-		lp.getImagePanel().add(ImageFunctions.displayImage(img));
-		SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
-		//}
+		for(int i=0; i<100; i++) {
+			lp.getImagePanel().add(ImageFunctions.displayImage(img));
+			SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
+		}
 	}
 	public BufferedImage getPic() {
 		return pic;
