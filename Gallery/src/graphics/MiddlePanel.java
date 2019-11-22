@@ -21,13 +21,15 @@ public class MiddlePanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private PhotoAlbum currentCategory;
 	public MiddlePanel(Color c) {
+		//default category without name and description
+		this.currentCategory = new PhotoAlbum();
 		this.CreatePanel(c);
 	}
 	
 	public void CreatePanel(Color c) {
 		this.setBackground(c);
-		this.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 20));
-		//this.setLayout(new WrapLayout(WrapLayout.LEFT, 20,20));
+		//this.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 20));
+		this.setLayout(new WrapLayout(WrapLayout.LEFT, 0,0));
 		this.setMinimumSize(new Dimension(400,400));
 		this.setPreferredSize(new Dimension(1100, 750));
 		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);

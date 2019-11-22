@@ -2,7 +2,6 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
@@ -20,9 +19,8 @@ public class LeftPanel extends JPanel{
 	public void CreatePanel(Color c) {
 		this.setBackground(c);
 		this.setLayout(new GridBagLayout());
-		this.setPreferredSize(new Dimension(400,500));
-		this.setMinimumSize(new Dimension(400,500));
-		GridBagConstraints gbc = new GridBagConstraints();
+		this.setPreferredSize(new Dimension(200,400));
+		this.setMinimumSize(new Dimension(200,400));
 	}
 	
 	

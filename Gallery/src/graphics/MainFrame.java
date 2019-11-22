@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
+
+import functionalities.Categories;
 
 
 /** This class defines the main window of the application: 
@@ -28,12 +31,12 @@ public class MainFrame extends JFrame implements MouseListener{
 	private MiddlePanel p2;
 	private LowerPanel p3;
 	private ImagePanel ip;
-	
+	private Categories album;
 	/**
 	 * Initialize the MainFrame without a title
 	 */
 	public MainFrame() {
-		this("");
+		this("Placeholder title");
 	}
 
 	/**
@@ -48,6 +51,18 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.container = new JPanel();
 		this.container.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
+		
+		this.album = new Categories();
+		
+		/**
+		 * Used for resizing purposes (doesn't work)
+		 */
+		//Component Listener
+		this.addComponentListener(new java.awt.event.ComponentAdapter() {
+	        public void componentResized(ComponentEvent e) {
+	                    p2.revalidate();
+	            }
+	    });
 		
 		//Mouse Listener
 		container.addMouseListener(this);
@@ -64,19 +79,16 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.container.add(p1, gbc);
 		
 		//Middle Panel 
-		
-		//ip.setVisible(false);
 		this.p2 = new MiddlePanel(java.awt.Color.PINK);
 		this.ip = new ImagePanel(p2);
 		JScrollPane jsp = new JScrollPane(ip, 
 			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
-				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jsp.setMinimumSize(new Dimension(p2.getMinimumSize()));
+		jsp.setMaximumSize(new Dimension(p2.getMaximumSize()));
 		jsp.setPreferredSize(new Dimension(p2.getPreferredSize()));
 		jsp.setVisible(true);
 		this.p2.add(jsp);
-//		jsp.getVerticalScrollBar().setPreferredSize(new Dimension(10,0));
-//		jsp.getHorizontalScrollBar().setPreferredSize(new Dimension(0,10));
 		SwingUtilities.updateComponentTreeUI(this);
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
@@ -86,7 +98,6 @@ public class MainFrame extends JFrame implements MouseListener{
 		gbc.gridy = 0;
 		gbc.gridheight = 1;
 		this.container.add(p2, gbc);
-		//this.container.add(p2,gbc);
 		
 		//Lower Panel
 		this.p3 = new LowerPanel(new Color(201, 221, 155), p1, p2, ip, this);
@@ -98,12 +109,11 @@ public class MainFrame extends JFrame implements MouseListener{
 		gbc.gridy = 1;
 		this.container.add(p3, gbc);
 		this.add(container);
-		//this.pack();
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
