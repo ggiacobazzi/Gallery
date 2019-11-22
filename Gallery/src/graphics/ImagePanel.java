@@ -21,9 +21,10 @@ public class ImagePanel extends JPanel{
 	public ImagePanel(MiddlePanel p2) {
 		this.setPreferredSize(p2.getPreferredSize());
 		this.setMinimumSize(p2.getMinimumSize());
+		this.setMaximumSize(p2.getMaximumSize());
 		this.setBackground(Color.BLACK);
 		this.setLayout(new WrapLayout(WrapLayout.LEFT, 20,20));
-		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		//this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		this.setVisible(true);
 	}
 }

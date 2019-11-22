@@ -1,12 +1,8 @@
 package graphics;
 
-import functionalities.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.*;
 import java.io.File;
 
@@ -18,17 +14,18 @@ import javax.swing.JPanel;
  * Panel that contains the main buttons for the application
  * @author gabbb
  */
-public class LowerPanel extends JPanel implements ActionListener {
+public class LowerPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Buttons of the application
 	 * @param next go to next image, if able
 	 * @param last go to previous image, if able
-	 * @param add add a category
+	 * @param add add an image
 	 * @param remove remove a category
+	 * @param addweb add an image from a URL
 	 */
-	private JButton next, addweb, add, remove;
+	private JButton nextbt, addwebbt, addbt, removebt;
 	private MiddlePanel p2;
 	private ImagePanel ip;
 	
@@ -38,73 +35,31 @@ public class LowerPanel extends JPanel implements ActionListener {
 		this.setImagePanel(ip);
 		this.CreatePanel(c);
 	}
-	
+	/**
+	 * Method used to create the panel with buttons and such
+	 * @param c Color of the background of the panel
+	 */
 	private void CreatePanel(Color c) {
 		this.setBackground(c);
-		
 		this.setLayout(new FlowLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.insets = new Insets(6, 6, 6, 6);
 		
-		String addwebicon = "defaults" + File.separator + "at-sign.icon.png";
-		this.addweb = new Button("Add from url", addwebicon);
-		this.add(this.addweb);
-		//this.add((addweb = new JButton("Add from url")));
-		//this.add((addweb = new JButton("Add from url")), gbc);
-		//addweb.setSize(new Dimension(100, 100));
-		//addweb.setPreferredSize(new Dimension(100, 100));
-		this.addweb.addActionListener(this);
-		gbc.gridx++;
+		String addwebicon = "defaults" + File.separator + "globe-icon.png";
+		this.addwebbt = new Button("Add from url", addwebicon, "addweb", this);
+		this.add(this.addwebbt);
+		this.addwebbt.addActionListener((ActionListener) this.addwebbt);
+		
 		String addicon = "defaults" + File.separator + "plus-icon.png";
-		this.add = new Button("Add", addicon);
-		this.add(this.add);
-		//this.add((add = new JButton("Add")));
-		//this.add((add = new JButton("Add")), gbc);
-		//add.setPreferredSize(new Dimension(100, 100));
-		add.addActionListener(this);
-		gbc.gridx++;
-		String remove = "defaults" + File.separator + "folder-blue-icon.png";
-		this.remove = new Button("Remove", remove);
-		this.add(this.remove);
-		//this.add((remove = new JButton("Remove")));
-		//this.add((remove = new JButton("Remove")), gbc);
-		//remove.setPreferredSize(new Dimension(100, 100));
-		gbc.gridx++;
-		this.add((next = new JButton("Next")));
-		//this.add((next = new JButton("Next")), gbc);
-		next.setPreferredSize(new Dimension(100, 100));
-	}
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 */
-	public void actionPerformed(ActionEvent e) {
+		this.addbt = new Button("Add", addicon, "add", this);
+		this.add(this.addbt);
+		this.addbt.addActionListener((ActionListener) this.addbt);
 		
-		if(e.getSource() == add) {
-			ImageFunctions.loadImage(false, this);
-				//ip.add(picLabel);
-				//SwingUtilities.updateComponentTreeUI(ip);
-				//SwingUtilities.updateComponentTreeUI(p2);
-				System.out.println("ciao");
-		}
-			//ip.revalidate();
-		else if(e.getSource() == addweb) {
-			ImageFunctions.loadImage(true, this);
-//				SwingUtilities.updateComponentTreeUI(ip);
-//				SwingUtilities.updateComponentTreeUI(p2);
-				//ip.revalidate();
-		}
+		String removeicon = "defaults" + File.separator + "minus-icon.png";
+		this.removebt = new Button("Remove", removeicon, "remove", this);
+		this.add(this.removebt);
+		this.removebt.addActionListener((ActionListener) this.removebt);
 		
-		else if(e.getSource() == remove) {
-			
-		}
-		else if(e.getSource() == next) {
-			
-		}
+		this.add((nextbt = new JButton("Next")));
+		nextbt.setPreferredSize(new Dimension(100, 100));
 	}
 	
 	public MiddlePanel getP2() {
