@@ -19,12 +19,15 @@ public class Categories {
 
 		public void addCategory(Categories arr, PhotoAlbum cat) {
 			arr.list.add(cat);
+			arr.numberOfCategories++;
 		}
 		public void removeCategory(Categories arr, PhotoAlbum cat) {
 			arr.list.remove(cat);
+			arr.numberOfCategories--;
 		}
 		public void removeAll(Categories arr) {
 			arr.list.removeAll(list);
+			arr.numberOfCategories = 0;
 		}
 		public int getNumberOfCategories() {
 			return numberOfCategories;
