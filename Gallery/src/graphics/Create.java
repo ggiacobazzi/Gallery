@@ -1,6 +1,6 @@
 package graphics;
 
-import functionalities.Categories;
+import functionalities.PhotoAlbum;
 
 /**This class initializes the main frame, containing all the panels
  * 

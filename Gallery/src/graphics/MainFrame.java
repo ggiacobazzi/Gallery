@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 
-import functionalities.Categories;
+import functionalities.PhotoAlbum;
 
 
 /** This class defines the main window of the application: 
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame implements MouseListener{
 	private MiddlePanel p2;
 	private LowerPanel p3;
 	private ImagePanel ip;
-	private Categories album;
+	private PhotoAlbum album;
 	/**
 	 * Initialize the MainFrame without a title
 	 */
@@ -52,7 +52,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.container.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		this.album = new Categories();
+		this.album = new PhotoAlbum();
 		
 		/**
 		 * Used for resizing purposes (doesn't work)

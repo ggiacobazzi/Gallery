@@ -48,7 +48,7 @@ public class ImageFunctions{
 					try {
 						immy = ImageIO.read(file);
 						Image newimage = new Image(immy, file);
-						lowerPanel.getP2().getCurrentCategory().getDefCat().add(newimage);
+						lowerPanel.getP2().getCurrentAlbum().getList().add(newimage);
 						Status s = new Status(true, "Immagine caricata correttamente");
 						lowerPanel.getImagePanel().add(displayImage(newimage.getRawimage()));
 						SwingUtilities.updateComponentTreeUI(lowerPanel.getImagePanel());

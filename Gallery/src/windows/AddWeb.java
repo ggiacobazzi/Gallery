@@ -77,8 +77,8 @@ public class AddWeb extends JFrame implements ActionListener {
 			try {
 				URL url = new URL(urlstring);
 				Image newimage = new Image(ImageIO.read(url));
-				lp.getP2().getCurrentCategory().getDefCat().add(newimage);
-				System.out.println("Elementi nella lista: " + lp.getP2().getCurrentCategory().getDefCat().size());
+				lp.getP2().getCurrentAlbum().getList().add(newimage);
+				System.out.println("Elementi nella lista: " + lp.getP2().getCurrentAlbum().getList().size());
 				//BufferedImage img = ImageIO.read(url);
 				this.displayImageFromWeb(newimage.getRawimage(), lp);
 			} catch (MalformedURLException e1) {

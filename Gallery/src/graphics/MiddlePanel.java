@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 
+import functionalities.Category;
 import functionalities.PhotoAlbum;
 
 /**
@@ -19,10 +20,11 @@ public class MiddlePanel extends JPanel {
 	private int imgcurr = 0;
 	private int imgmax = 4;      //Max Images in a row
 	private static final long serialVersionUID = 1L;
-	private PhotoAlbum currentCategory;
+	private Category currentCategory;
+	private PhotoAlbum currentAlbum;
 	public MiddlePanel(Color c) {
 		//default category without name and description
-		this.currentCategory = new PhotoAlbum();
+		this.setCurrentAlbum(new PhotoAlbum());
 		this.CreatePanel(c);
 	}
 	
@@ -51,11 +53,19 @@ public class MiddlePanel extends JPanel {
 		this.imgmax = imgmax;
 	}
 
-	public PhotoAlbum getCurrentCategory() {
+	public PhotoAlbum getCurrentAlbum() {
+		return currentAlbum;
+	}
+
+	public void setCurrentAlbum(PhotoAlbum currentAlbum) {
+		this.currentAlbum = currentAlbum;
+	}
+
+	public Category getCurrentCategory() {
 		return currentCategory;
 	}
 
-	public void setCurrentCategory(PhotoAlbum currentCategory) {
+	public void setCurrentCategory(Category currentCategory) {
 		this.currentCategory = currentCategory;
 	}
 	

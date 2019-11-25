@@ -1,73 +1,51 @@
 package functionalities;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Class used to create a photoalbum containing images and categories
+ * @author gabbb
+ *
+ */
+
 public class PhotoAlbum {
-	@SuppressWarnings("unused")
-	
-	private int maxImages;
-	private LocalDateTime dataOfCreation;
-	private String name;
-	private String description;
-	private ArrayList<Image> defCat;
-	
-	/**
-	 * Default constructor used when it's called without values
-	 */
-	
-	public PhotoAlbum() {
-		this.setDefCat(new ArrayList<Image>());
-		setMaxImages(0);
-		setDataOfCreation(java.time.LocalDateTime.now());
-		setName("placeholder");
-		setDescription("Just a normal category without a description, because the user was lazy :)");
-	}
-	
-	/**
-	 * Constructor that uses "name" and "desc" to create a "Category" class 
-	 * @param name name of the instance of Category
-	 * @param desc description of the instance of Category
-	 */
-	public PhotoAlbum(String name, String desc) {
-		this.setDefCat(new ArrayList<Image>());
-		//ArrayList<Image> cat = new ArrayList<Image>();
-		setMaxImages(0);
-		setDataOfCreation(java.time.LocalDateTime.now());
-		setName(name);
-		setDescription(desc);
-	}
-	
-	public int getMaxImages() {
-		return maxImages;
-	}
-	public void setMaxImages(int maxImages) {
-		this.maxImages = maxImages;
-	}
-	public LocalDateTime getDataOfCreation() {
-		return dataOfCreation;
-	}
-	public void setDataOfCreation(LocalDateTime localDateTime) {
-		this.dataOfCreation = localDateTime;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+		private ArrayList<Category> categoryList;
+		private ArrayList<Image> list;
+		private int numberOfCategories;  //Can be removed, gonna figure it out later :)
+		
+		public PhotoAlbum() {
+			setList();
+			setNumberOfCategories(0);
+		}
 
-	public ArrayList<Image> getDefCat() {
-		return defCat;
-	}
-
-	public void setDefCat(ArrayList<Image> defCat) {
-		this.defCat = defCat;
-	}
+		public void addCategory(PhotoAlbum alb, Category cat) {
+			alb.categoryList.add(cat);
+			alb.numberOfCategories++;
+		}
+		public void removeCategory(PhotoAlbum alb, Category cat) {
+			alb.categoryList.remove(cat);
+			alb.numberOfCategories--;
+		}
+		
+		//Remove all images and all categories
+		public void removeAll(PhotoAlbum alb) {
+			alb.categoryList.removeAll(categoryList);
+			alb.list.removeAll(list);
+			alb.numberOfCategories = 0;
+		}
+		
+		public void setList() {
+			this.list = new ArrayList<Image>();
+		}
+		
+		public ArrayList<Image> getList(){
+			return this.list;
+		}
+		
+		public int getNumberOfCategories() {
+			return numberOfCategories;
+		}
+		public void setNumberOfCategories(int numberOfCategories) {
+			this.numberOfCategories = numberOfCategories;
+		}
 }
