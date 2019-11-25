@@ -32,6 +32,7 @@ public class MainFrame extends JFrame implements MouseListener{
 	private LowerPanel p3;
 	private ImagePanel ip;
 	private PhotoAlbum album;
+	private JScrollPane jsp;
 	/**
 	 * Initialize the MainFrame without a title
 	 */
@@ -47,7 +48,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		// TODO Auto-generated constructor stub
 		super(title);
 		this.setSize(1200, 650);
-		this.setMinimumSize(new Dimension(600, 500));
+		this.setMinimumSize(new Dimension(1100, 500));
 		this.container = new JPanel();
 		this.container.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -61,6 +62,8 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.addComponentListener(new java.awt.event.ComponentAdapter() {
 	        public void componentResized(ComponentEvent e) {
 	                    p2.revalidate();
+	                    ip.revalidate();
+	                    jsp.revalidate();
 	            }
 	    });
 		
@@ -81,7 +84,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		//Middle Panel 
 		this.p2 = new MiddlePanel(java.awt.Color.PINK);
 		this.ip = new ImagePanel(p2);
-		JScrollPane jsp = new JScrollPane(ip, 
+		this.jsp = new JScrollPane(ip, 
 			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		jsp.setMinimumSize(new Dimension(p2.getMinimumSize()));

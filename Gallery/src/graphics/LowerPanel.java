@@ -25,12 +25,11 @@ public class LowerPanel extends JPanel {
 	 * @param remove remove a category
 	 * @param addweb add an image from a URL
 	 */
-	private JButton nextbt, addwebbt, addbt, removebt;
+	private JButton addwebbt, addbt, removebt, categorybt, copybt, prevbt, nextbt;
 	private MiddlePanel p2;
 	private ImagePanel ip;
 	
 	public LowerPanel(Color c, LeftPanel p1, MiddlePanel p2, ImagePanel ip, JFrame jf) {
-		this.setMinimumSize(new Dimension(600,100));
 		this.setP2(p2);
 		this.setImagePanel(ip);
 		this.CreatePanel(c);
@@ -41,6 +40,8 @@ public class LowerPanel extends JPanel {
 	 */
 	private void CreatePanel(Color c) {
 		this.setBackground(c);
+		this.setMinimumSize(new Dimension(1000,100));
+		this.setPreferredSize(new Dimension(800,100));
 		this.setLayout(new FlowLayout());
 		
 		String addwebicon = "defaults" + File.separator + "globe-icon.png";
@@ -58,8 +59,26 @@ public class LowerPanel extends JPanel {
 		this.add(this.removebt);
 		this.removebt.addActionListener((ActionListener) this.removebt);
 		
-		this.add((nextbt = new JButton("Next")));
-		nextbt.setPreferredSize(new Dimension(100, 100));
+		String newcategory = "defaults" + File.separator + "category-icon.png";
+		this.categorybt = new Button("New Category", newcategory, "newcat", this);
+		this.add(this.categorybt);
+		this.categorybt.addActionListener((ActionListener) this.categorybt);
+		
+		String copytofolder = "defaults" + File.separator + "copy-to-folder-icon.png";
+		this.copybt = new Button("Copy to Category", copytofolder, "copyto", this);
+		this.add(this.copybt);
+		this.copybt.addActionListener((ActionListener) this.copybt);
+
+		String previous = "defaults" + File.separator + "previous-icon.png";
+		this.prevbt = new Button("Previous", previous, "prev", this);
+		this.add(this.prevbt);
+		this.prevbt.addActionListener((ActionListener) this.prevbt);
+		
+		String next = "defaults" + File.separator + "next-icon.png";
+		this.nextbt = new Button("Next", next, "next", this);
+		this.add(this.nextbt);
+		this.copybt.addActionListener((ActionListener) this.nextbt);
+		
 	}
 	
 	public MiddlePanel getP2() {

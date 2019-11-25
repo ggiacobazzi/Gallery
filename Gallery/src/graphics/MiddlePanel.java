@@ -4,10 +4,13 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
 import functionalities.Category;
+import functionalities.Image;
 import functionalities.PhotoAlbum;
 
 /**
@@ -15,13 +18,14 @@ import functionalities.PhotoAlbum;
  * @author gabbb
  *
  */
-public class MiddlePanel extends JPanel {
+public class MiddlePanel extends JPanel implements MouseListener {
 
 	private int imgcurr = 0;
 	private int imgmax = 4;      //Max Images in a row
 	private static final long serialVersionUID = 1L;
-	private Category currentCategory;
 	private PhotoAlbum currentAlbum;
+	private Category currentCategory;
+	private Image currentImage;
 	public MiddlePanel(Color c) {
 		//default category without name and description
 		this.setCurrentAlbum(new PhotoAlbum());
@@ -30,8 +34,8 @@ public class MiddlePanel extends JPanel {
 	
 	public void CreatePanel(Color c) {
 		this.setBackground(c);
-		//this.setLayout(new FlowLayout(FlowLayout.LEADING, 20, 20));
-		this.setLayout(new WrapLayout(WrapLayout.LEFT, 0,0));
+		this.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
+		//this.setLayout(new WrapLayout(WrapLayout.LEFT, 0,0));
 		this.setMinimumSize(new Dimension(400,400));
 		this.setPreferredSize(new Dimension(1100, 750));
 		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -68,5 +72,43 @@ public class MiddlePanel extends JPanel {
 	public void setCurrentCategory(Category currentCategory) {
 		this.currentCategory = currentCategory;
 	}
+
+	public Image getCurrentImage() {
+		return currentImage;
+	}
+
+	public void setCurrentImage(Image currentImage) {
+		this.currentImage = currentImage;
+	}
 	
+	
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }

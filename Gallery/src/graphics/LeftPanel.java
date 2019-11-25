@@ -20,7 +20,7 @@ public class LeftPanel extends JPanel{
 		this.setBackground(c);
 		this.setLayout(new GridBagLayout());
 		this.setPreferredSize(new Dimension(200,400));
-		this.setMinimumSize(new Dimension(200,400));
+		this.setMinimumSize(new Dimension(300,400));
 	}
 	
 	
