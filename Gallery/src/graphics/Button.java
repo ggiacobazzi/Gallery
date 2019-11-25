@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
+import functionalities.Category;
 import functionalities.ImageFunctions;
 
 public class Button extends JButton implements ActionListener {
@@ -37,8 +39,19 @@ public void actionPerformed(ActionEvent e) {
 		else if(str.equals("addweb")) {
 			ImageFunctions.loadImage(true, this.getParentpanel());
 		}
-		
 		else if(str.equals("remove")) {
+			
+		}
+		else if(str.equals("newcat")) {
+			Category cat = new Category();
+			parentpanel.getImagePanel().add(cat.getIcon());
+			System.out.println("cat added");
+			SwingUtilities.updateComponentTreeUI(parentpanel.getImagePanel());
+		}
+		else if(str.equals("copyto")) {
+			
+		}
+		else if (str.equals("prev")){
 			
 		}
 		else if(str.equals("next")) {

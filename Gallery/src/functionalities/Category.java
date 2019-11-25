@@ -1,7 +1,13 @@
 package functionalities;
 
+import java.awt.Dimension;
+import java.io.File;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  * Class used to create a category inside a PhotoAlbum
@@ -17,6 +23,9 @@ public class Category {
 	private String name;
 	private String description;
 	private ArrayList<Image> defCat;
+	//private ImageIcon icon;
+	private JLabel caticon;
+	private String path = "defaults" + File.separator + "folder-blue-icon.png";
 	
 	/**
 	 * Default constructor used when it's called without values
@@ -36,12 +45,34 @@ public class Category {
 		newCategorySetUp();
 		setName(name);
 		setDescription(desc);
+		System.out.println("cat created");
 	}
 	
+	//to override in protected
 	public void newCategorySetUp() {
+		setUpIcon();
 		this.setDefCat(new ArrayList<Image>());
 		this.setMaxImages(0);
 		this.setDataOfCreation(java.time.LocalDateTime.now());
+	}
+	
+	public void setUpIcon() {
+		Dimension dim = new Dimension(160, 108);
+		this.caticon = new JLabel();
+		this.caticon.setMaximumSize(dim);
+		this.caticon.setPreferredSize(dim);
+		this.caticon.setVisible(true);
+		chooseImageForIcon();
+	}
+	
+	public void chooseImageForIcon() {
+		URL imageURL = getClass().getResource(this.getPath());
+		System.out.println("Stato:" + imageURL);
+		if(imageURL != null) {
+			System.out.println("qua");
+			this.caticon.setIcon(new ImageIcon(imageURL));
+			System.out.println("qui");
+		}
 	}
 	
 	public int getMaxImages() {
@@ -82,5 +113,21 @@ public class Category {
 
 	public void setDefCat(ArrayList<Image> defCat) {
 		this.defCat = defCat;
+	}
+
+	public JLabel getIcon() {
+		return caticon;
+	}
+
+	public void setIcon(JLabel icon) {
+		this.caticon = icon;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 }
