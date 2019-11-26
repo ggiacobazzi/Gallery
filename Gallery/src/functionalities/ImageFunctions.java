@@ -14,8 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
-
-import graphics.Button;
 import graphics.LowerPanel;
 import windows.*;
 

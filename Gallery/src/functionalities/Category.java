@@ -1,12 +1,11 @@
 package functionalities;
 
-import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.URL;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 
 /**
@@ -23,9 +22,8 @@ public class Category {
 	private String name;
 	private String description;
 	private ArrayList<Image> defCat;
-	//private ImageIcon icon;
 	private JLabel caticon;
-	private String path = "defaults" + File.separator + "folder-blue-icon.png";
+	private String path = "defaults" + File.separator + "folder-blue-icon.png/";
 	
 	/**
 	 * Default constructor used when it's called without values
@@ -57,22 +55,20 @@ public class Category {
 	}
 	
 	public void setUpIcon() {
-		Dimension dim = new Dimension(160, 108);
-		this.caticon = new JLabel();
-		this.caticon.setMaximumSize(dim);
-		this.caticon.setPreferredSize(dim);
-		this.caticon.setVisible(true);
-		chooseImageForIcon();
+		this.setIcon(chooseImageForIcon());
 	}
 	
-	public void chooseImageForIcon() {
-		URL imageURL = getClass().getResource(this.getPath());
-		System.out.println("Stato:" + imageURL);
-		if(imageURL != null) {
-			System.out.println("qua");
-			this.caticon.setIcon(new ImageIcon(imageURL));
-			System.out.println("qui");
+	public JLabel chooseImageForIcon() {
+		BufferedImage ex;
+		try {
+			ex = ImageIO.read(new File(this.getPath()));
+			return ImageFunctions.displayImage(ex);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		System.out.println("Caricamento fallito");
+		return null;
 	}
 	
 	public int getMaxImages() {

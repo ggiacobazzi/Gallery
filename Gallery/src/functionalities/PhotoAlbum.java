@@ -19,7 +19,9 @@ public class PhotoAlbum {
 		}
 
 		public void addCategory(PhotoAlbum alb, Category cat) {
-			alb.categoryList.add(cat);
+			if(this.categoryList == null)
+				setCategoryList();
+			alb.getCategoryList().add(cat);
 			alb.numberOfCategories++;
 		}
 		public void removeCategory(PhotoAlbum alb, Category cat) {
@@ -29,9 +31,17 @@ public class PhotoAlbum {
 		
 		//Remove all images and all categories
 		public void removeAll(PhotoAlbum alb) {
-			alb.categoryList.removeAll(categoryList);
-			alb.list.removeAll(list);
+			alb.getCategoryList().removeAll(getCategoryList());
+			alb.getList().removeAll(getList());
 			alb.numberOfCategories = 0;
+		}
+		
+		public void setCategoryList() {
+			this.categoryList = new ArrayList<Category>();
+		}
+		
+		public ArrayList<Category> getCategoryList() {
+			return this.categoryList;
 		}
 		
 		public void setList() {
@@ -45,6 +55,7 @@ public class PhotoAlbum {
 		public int getNumberOfCategories() {
 			return numberOfCategories;
 		}
+		
 		public void setNumberOfCategories(int numberOfCategories) {
 			this.numberOfCategories = numberOfCategories;
 		}

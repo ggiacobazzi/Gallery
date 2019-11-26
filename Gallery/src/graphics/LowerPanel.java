@@ -25,7 +25,7 @@ public class LowerPanel extends JPanel {
 	 * @param remove remove a category
 	 * @param addweb add an image from a URL
 	 */
-	private JButton addwebbt, addbt, removebt, categorybt, copybt, prevbt, nextbt;
+	private JButton addwebbt, addbt, removebt, categorybt, copytobt, mergebt, prevbt, nextbt;
 	private MiddlePanel p2;
 	private ImagePanel ip;
 	
@@ -64,10 +64,15 @@ public class LowerPanel extends JPanel {
 		this.add(this.categorybt);
 		this.categorybt.addActionListener((ActionListener) this.categorybt);
 		
-		String copytofolder = "defaults" + File.separator + "copy-to-folder-icon.png";
-		this.copybt = new Button("Copy to Category", copytofolder, "copyto", this);
-		this.add(this.copybt);
-		this.copybt.addActionListener((ActionListener) this.copybt);
+		String copyto = "defaults" + File.separator + "copy-to-cat.png";
+		this.copytobt = new Button("Copy to", copyto, "copyto", this);
+		this.add(this.copytobt);
+		this.copytobt.addActionListener((ActionListener) this.copytobt);
+		
+		String mergecategories = "defaults" + File.separator + "merge-folders.png";
+		this.mergebt = new Button("Merge Categories", mergecategories, "mergeto", this);
+		this.add(this.mergebt);
+		this.mergebt.addActionListener((ActionListener) this.mergebt);
 
 		String previous = "defaults" + File.separator + "previous-icon.png";
 		this.prevbt = new Button("Previous", previous, "prev", this);
@@ -77,8 +82,7 @@ public class LowerPanel extends JPanel {
 		String next = "defaults" + File.separator + "next-icon.png";
 		this.nextbt = new Button("Next", next, "next", this);
 		this.add(this.nextbt);
-		this.copybt.addActionListener((ActionListener) this.nextbt);
-		
+		this.mergebt.addActionListener((ActionListener) this.nextbt);
 	}
 	
 	public MiddlePanel getP2() {
