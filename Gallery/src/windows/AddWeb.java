@@ -42,6 +42,7 @@ public class AddWeb extends JFrame implements ActionListener {
 	 * @param pic
 	 */
 	public AddWeb(LowerPanel lowerPanel) {
+		//super("Add Image from web");
 		JFrame jf = new JFrame("Add Image from web");
 		jf.setSize(new Dimension(500, 100));
 		jf.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));

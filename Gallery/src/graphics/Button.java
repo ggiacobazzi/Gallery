@@ -47,6 +47,8 @@ public void actionPerformed(ActionEvent e) {
 			parentpanel.getImagePanel().add(cat.getIcon());
 			System.out.println("cat added");
 			SwingUtilities.updateComponentTreeUI(parentpanel.getImagePanel());
+			parentpanel.getP2().getCurrentAlbum().addCategory(parentpanel.getP2().getCurrentAlbum(), cat);
+			System.out.println("Categorie totali: " + parentpanel.getP2().getCurrentAlbum().getCategoryList().size());
 		}
 		else if(str.equals("copyto")) {
 			

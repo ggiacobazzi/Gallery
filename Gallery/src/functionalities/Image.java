@@ -14,28 +14,28 @@ public class Image {
 	/**
 	 * Metadata of the image
 	 */
-	private static BufferedImage rawimage;
-	private static String path;   
-	private static BasicFileAttributes attr;
-	private static String name;
-	private static String extension;
-	private static long dimension;
-	private static FileTime creation;
-	private static FileTime lastaccess;
-	private static FileTime lastmodification;
+	private BufferedImage rawimage;
+	private String path;   
+	private BasicFileAttributes attr;
+	private String name;
+	private String extension;
+	private long dimension;
+	private FileTime creation;
+	private FileTime lastaccess;
+	private FileTime lastmodification;
 	
    //TODO: fix absolutepath@images_added_from_web;
 	public Image(BufferedImage img, File rawfile) {
 		try {
-			Image.setRawimage(img);
-			Image.setPath(rawfile.getAbsolutePath());
-			Image.setAttr(Files.readAttributes(Paths.get(Image.getPath()), BasicFileAttributes.class));
-			Image.setDimension(Image.getAttr().size());
-			Image.setCreation(Image.getAttr().creationTime());
-			Image.setLastaccess(Image.getAttr().lastAccessTime());
-			Image.setLastmodification(Image.getAttr().lastModifiedTime());
-			Image.setName(getName(rawfile));
-			Image.setExtension(getExtension(rawfile));
+			this.setRawimage(img);
+			this.setPath(rawfile.getAbsolutePath());
+			this.setAttr(Files.readAttributes(Paths.get(this.getPath()), BasicFileAttributes.class));
+			this.setDimension(this.getAttr().size());
+			this.setCreation(this.getAttr().creationTime());
+			this.setLastaccess(this.getAttr().lastAccessTime());
+			this.setLastmodification(this.getAttr().lastModifiedTime());
+			this.setName(getName(rawfile));
+			this.setExtension(getExtension(rawfile));
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -44,89 +44,88 @@ public class Image {
 	}
 	
 	public Image(BufferedImage img) {
-		Image.setRawimage(img);
+		this.setRawimage(img);
 	}
 	/**
 	 * Set/Getters for the class
 	 * @return
 	 */
 	
-	public static BufferedImage getRawimage() {
-		return rawimage;
+	public BufferedImage getRawimage() {
+		return this.rawimage;
 	}
 
-	public static void setRawimage(BufferedImage rawimage) {
-		Image.rawimage = rawimage;
+	public void setRawimage(BufferedImage rawimage) {
+		this.rawimage = rawimage;
 	}
 
-	public static String getPath() {
-		return path;
+	public String getPath() {
+		return this.path;
 	}
 
-	public static void setPath(String path) {
-		Image.path = path;
+	public void setPath(String path) {
+		this.path = path;
 	}
 	
-	public static BasicFileAttributes getAttr() {
-
+	public BasicFileAttributes getAttr() {
 		return attr;
 	}
 	
-	public static void setAttr(BasicFileAttributes attr) {
-		Image.attr = attr;
+	public void setAttr(BasicFileAttributes attr) {
+		this.attr = attr;
 	}
 	
-	public static String getName(File rawfile) {
-		return name;
+	public String getName(File rawfile) {
+		return this.name;
 	}
-	public static void setName(String name) {
-		Image.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	public static String getExtension(File img) {
+	public String getExtension(File img) {
 		 if (img == null) {
 		        return "";
 		    }
 		    String name = img.getName();
 		    int i = name.lastIndexOf('.');
-		    extension = i > 0 ? name.substring(i + 1) : "";
-		    return extension;
+		    this.extension = i > 0 ? name.substring(i + 1) : "";
+		    return this.extension;
 	}
 	
-	public static void setExtension(String ext) {
-		Image.extension = ext;
+	public void setExtension(String ext) {
+		this.extension = ext;
 	}
 
-	public static long getDimension() {
-		return dimension;
+	public long getDimension() {
+		return this.dimension;
 	}
 
-	public static void setDimension(long dimension) {
-		Image.dimension = dimension;
+	public void setDimension(long dimension) {
+		this.dimension = dimension;
 	}
 
-	public static FileTime getCreation() {
-		return creation;
+	public FileTime getCreation() {
+		return this.creation;
 	}
 
-	public static void setCreation(FileTime creation) {
-		Image.creation = creation;
+	public void setCreation(FileTime creation) {
+		this.creation = creation;
 	}
 
-	public static FileTime getLastaccess() {
-		return lastaccess;
+	public FileTime getLastaccess() {
+		return this.lastaccess;
 	}
 
-	public static void setLastaccess(FileTime lastaccess) {
-		Image.lastaccess = lastaccess;
+	public void setLastaccess(FileTime lastaccess) {
+		this.lastaccess = lastaccess;
 	}
 
-	public static FileTime getLastmodification() {
-		return lastmodification;
+	public FileTime getLastmodification() {
+		return this.lastmodification;
 	}
 
-	public static void setLastmodification(FileTime lastmodification) {
-		Image.lastmodification = lastmodification;
+	public void setLastmodification(FileTime lastmodification) {
+		this.lastmodification = lastmodification;
 	}
 
 	
