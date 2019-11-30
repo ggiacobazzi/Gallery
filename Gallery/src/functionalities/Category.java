@@ -1,12 +1,18 @@
 package functionalities;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Random;
+
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
+
+import graphics.MiddlePanel;
 
 /**
  * Class used to create a category inside a PhotoAlbum
@@ -14,7 +20,7 @@ import javax.swing.JLabel;
  * @author gabri
  *
  */
-public class Category {
+public class Category implements MouseListener {
 	@SuppressWarnings("unused")
 	
 	private int maxImages;
@@ -24,14 +30,15 @@ public class Category {
 	private ArrayList<Image> defCat;
 	private JLabel caticon;
 	private String path = "defaults" + File.separator + "folder-blue-icon.png/";
+	private static MiddlePanel ref;
 	
 	/**
 	 * Default constructor used when it's called without values
 	 */
 	
-	public Category() {
-		this("placeholder", "Just a normal category without a description, because the user was lazy :)");
-	}
+//	public Category() {
+//		this("placeholder", "Just a normal category without a description, because the user was lazy :)");
+//	}
 	
 	/**
 	 * Constructor that uses "name" and "desc" to create a "Category" class 
@@ -39,19 +46,21 @@ public class Category {
 	 * @param name name of the instance of Category
 	 * @param desc description of the instance of Category
 	 */
-	public Category(String name, String desc) {
+	public Category(String name, String desc, MiddlePanel reference) {
+		Category.setRef(reference);
 		newCategorySetUp();
 		setName(name);
 		setDescription(desc);
+		this.caticon.addMouseListener(this);
 		System.out.println("cat created");
 	}
 	
 	//to override in protected
 	public void newCategorySetUp() {
-		setUpIcon();
 		this.setDefCat(new ArrayList<Image>());
 		this.setMaxImages(0);
 		this.setDataOfCreation(java.time.LocalDateTime.now());
+		setUpIcon();
 	}
 	
 	public void setUpIcon() {
@@ -59,14 +68,26 @@ public class Category {
 	}
 	
 	public JLabel chooseImageForIcon() {
-		BufferedImage ex;
-		try {
-			ex = ImageIO.read(new File(this.getPath()));
-			return ImageFunctions.displayImage(ex);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		//default icon
+		System.out.println("dim: " + this.getDefCat().size());
+		if(this.defCat.size() == 0) {
+			BufferedImage ex;
+			try {
+				ex = ImageIO.read(new File(this.getPath()));
+				return ImageFunctions.displayImage(ex);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		//random icon taken from the images in the category
+		else {
+			Random random = new Random();
+			int randnum = random.nextInt(this.getDefCat().size());
+			return ImageFunctions.displayImage(this.getDefCat().get(randnum).getRawimage());
+		}
+		
 		System.out.println("Caricamento fallito");
 		return null;
 	}
@@ -125,5 +146,46 @@ public class Category {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public static MiddlePanel getRef() {
+		return ref;
+	}
+
+	public static void setRef(MiddlePanel ref) {
+		Category.ref = ref;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		if(e.getClickCount() == 2) {
+			
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
