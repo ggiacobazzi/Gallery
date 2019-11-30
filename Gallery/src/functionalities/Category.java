@@ -29,16 +29,8 @@ public class Category implements MouseListener {
 	private String description;
 	private ArrayList<Image> defCat;
 	private JLabel caticon;
-	private String path = "defaults" + File.separator + "folder-blue-icon.png/";
+	private String path = "defaults" + File.separator + "folder-blue-icon.png";
 	private static MiddlePanel ref;
-	
-	/**
-	 * Default constructor used when it's called without values
-	 */
-	
-//	public Category() {
-//		this("placeholder", "Just a normal category without a description, because the user was lazy :)");
-//	}
 	
 	/**
 	 * Constructor that uses "name" and "desc" to create a "Category" class 
@@ -64,17 +56,17 @@ public class Category implements MouseListener {
 	}
 	
 	public void setUpIcon() {
-		this.setIcon(chooseImageForIcon());
+		this.setIcon(chooseImageForIcon(this.getPath()));
 	}
 	
-	public JLabel chooseImageForIcon() {
+	public JLabel chooseImageForIcon(String defaultIcon) {
 		
 		//default icon
 		System.out.println("dim: " + this.getDefCat().size());
 		if(this.defCat.size() == 0) {
 			BufferedImage ex;
 			try {
-				ex = ImageIO.read(new File(this.getPath()));
+				ex = ImageIO.read(new File(defaultIcon));
 				return ImageFunctions.displayImage(ex);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -159,7 +151,6 @@ public class Category implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 		if(e.getClickCount() == 2) {
 			
 		}
