@@ -1,7 +1,9 @@
 package functionalities;
 
+import java.awt.Component;
 import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
  
 /* Utils.java is used by FileChooserDemo2.java. */
 public class Utils {
@@ -26,14 +28,20 @@ public class Utils {
         return ext;
     }
  
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = Utils.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
+    /*
+     * Enable/Disable a panel
+     */
+    void setPanelEnabled(JPanel panel, Boolean isEnabled) {
+        panel.setEnabled(isEnabled);
+
+        Component[] components = panel.getComponents();
+
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                setPanelEnabled((JPanel) component, isEnabled);
+            }
+            component.setEnabled(isEnabled);
         }
     }
+    
 }

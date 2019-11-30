@@ -28,6 +28,7 @@ public class MainFrame extends JFrame implements MouseListener{
 	private static final long serialVersionUID = 1L;
 	private JPanel container;
 	private LeftPanel p1;
+	private MiddlePanel home;
 	private MiddlePanel p2;
 	private LowerPanel p3;
 	private ImagePanel ip;
@@ -53,7 +54,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.container.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
-		this.album = new PhotoAlbum();
+		this.setAlbum(new PhotoAlbum());
 		
 		/**
 		 * Used for resizing purposes (doesn't work)
@@ -101,6 +102,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		gbc.gridy = 0;
 		gbc.gridheight = 1;
 		this.container.add(p2, gbc);
+		this.setHome(this.p2);
 		
 		//Lower Panel
 		this.p3 = new LowerPanel(new Color(201, 221, 155), p1, p2, ip, this);
@@ -116,6 +118,24 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
+	
+	public MiddlePanel getHome() {
+		return home;
+	}
+
+	public void setHome(MiddlePanel home) {
+		this.home = home;
+	}
+
+	public PhotoAlbum getAlbum() {
+		return album;
+	}
+
+	public void setAlbum(PhotoAlbum album) {
+		this.album = album;
+	}
+
+	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {

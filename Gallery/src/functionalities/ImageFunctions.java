@@ -1,5 +1,6 @@
 package functionalities;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -10,6 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -65,42 +68,43 @@ public class ImageFunctions{
 	 * method used to display the image loaded
 	 * @param immy image used to create the label
 	 * @param picLabel label that is added to the panel
-	 * @return
+	 * @param name is the name displayed under the Image/Category
+	 * @return the label that will be added to the major panel
 	 */
 	public static JLabel displayImage(BufferedImage immy) {
 		JLabel picLabel = new JLabel();
-		picLabel.setSize(160, 108);  //240, 160
-		ImageIcon img = new ImageIcon(immy.getScaledInstance(picLabel.getWidth(), picLabel.getHeight(), java.awt.Image.SCALE_SMOOTH));
+		picLabel.setSize(240, 160);  //240, 160  160 108
+		ImageIcon img = new ImageIcon(immy.getScaledInstance(160, 108, java.awt.Image.SCALE_SMOOTH));
 		picLabel.setIcon(img);
 		picLabel.setVisible(true);
 		return picLabel;
 	}
 	
-	/**
-	 * method used to save a file locally from a url
-	 * @param url url of the image 
-	 * @return
-	 */
-	public static String saveFromWeb(URL url) {
-		String newstr = "new_file";
-		InputStream in;
-		try {
-			in = new BufferedInputStream(url.openStream());
-			OutputStream out = new BufferedOutputStream(new FileOutputStream(newstr));
-
-			for ( int i; (i = in.read()) != -1; ) {
-			    out.write(i);
-			}
-			in.close();
-			out.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return newstr;
-	}
-	
+//	/**
+//	 * method used to save a file locally from a url
+//	 * @param url url of the image 
+//	 * @return
+//	 */
+//	public static String saveFromWeb(URL url) {
+//		String newstr = "new_file";
+//		InputStream in;
+//		try {
+//			in = new BufferedInputStream(url.openStream());
+//			OutputStream out = new BufferedOutputStream(new FileOutputStream(newstr));
+//
+//			for ( int i; (i = in.read()) != -1; ) {
+//			    out.write(i);
+//			}
+//			in.close();
+//			out.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		return newstr;
+//	}
+//	
 //	public static void downloadFromWeb(String search, String path) {
 //		
 //		// This will get input data from the server

@@ -10,7 +10,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -77,16 +80,20 @@ public class AddWeb extends JFrame implements ActionListener {
 			this.urlstring = box.getText();
 			try {
 				URL url = new URL(urlstring);
-				Image newimage = new Image(ImageIO.read(url));
+				String filename = Paths.get(new URI(urlstring).getPath()).getFileName().toString();
+				Image newimage = new Image(ImageIO.read(url), filename);
 				lp.getP2().getCurrentAlbum().getList().add(newimage);
 				System.out.println("Elementi nella lista: " + lp.getP2().getCurrentAlbum().getList().size());
-				//BufferedImage img = ImageIO.read(url);
+				System.out.println("Nome: " + newimage.getName());
 				this.displayImageFromWeb(newimage.getRawimage(), lp);
 			} catch (MalformedURLException e1) {
 				Status s = new Status(false, "URL non valido");
 				e1.printStackTrace();
 				return;
 			} catch (IOException e1) {
+				e1.printStackTrace();
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			Status s = new Status(true, "Immagine caricata correttamente da URL");
@@ -98,11 +105,10 @@ public class AddWeb extends JFrame implements ActionListener {
 	 * @param lp reference to the panel where the image will be loaded
 	 */
 	public void displayImageFromWeb(BufferedImage img, LowerPanel lp) {
-		for(int i=0; i<100; i++) {
-			lp.getImagePanel().add(ImageFunctions.displayImage(img));
-			SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
-		}
+		lp.getImagePanel().add(ImageFunctions.displayImage(img));
+		SwingUtilities.updateComponentTreeUI(lp.getImagePanel());
 	}
+	
 	public BufferedImage getPic() {
 		return pic;
 	}

@@ -34,7 +34,7 @@ public class Image {
 			this.setCreation(this.getAttr().creationTime());
 			this.setLastaccess(this.getAttr().lastAccessTime());
 			this.setLastmodification(this.getAttr().lastModifiedTime());
-			this.setName(getName(rawfile));
+			this.setName(rawfile.getName());
 			this.setExtension(getExtension(rawfile));
 			
 		} catch (IOException e) {
@@ -43,8 +43,9 @@ public class Image {
 		}
 	}
 	
-	public Image(BufferedImage img) {
+	public Image(BufferedImage img, String name) {
 		this.setRawimage(img);
+		this.setName(name);
 	}
 	/**
 	 * Set/Getters for the class
@@ -75,7 +76,7 @@ public class Image {
 		this.attr = attr;
 	}
 	
-	public String getName(File rawfile) {
+	public String getName() {
 		return this.name;
 	}
 	public void setName(String name) {
