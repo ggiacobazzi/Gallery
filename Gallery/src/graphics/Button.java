@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 
 import functionalities.Category;
 import functionalities.ImageFunctions;
+import windows.NewCategory;
 
 public class Button extends JButton implements ActionListener {
 
@@ -43,7 +44,9 @@ public void actionPerformed(ActionEvent e) {
 			
 		}
 		else if(str.equals("newcat")) {
-			Category cat = new Category();
+			String ciao = "ciao";
+			NewCategory newcat = new NewCategory();
+			Category cat = new Category(ciao, ciao, parentpanel.getP2());
 			parentpanel.getImagePanel().add(cat.getIcon());
 			System.out.println("cat added");
 			SwingUtilities.updateComponentTreeUI(parentpanel.getImagePanel());
