@@ -3,6 +3,7 @@ package functionalities;
 import java.io.File;
 
 import graphics.MiddlePanel;
+import windows.PasswordCheck;
 
 /**
  * Class used to create a protected category inside a PhotoAlbum
@@ -12,31 +13,20 @@ import graphics.MiddlePanel;
  */
 public class CategoryProtected extends Category {
 
-	private String path = "defaults" + File.separator + "folder-blue-locked-icon.png";
 	private String password;
-	public CategoryProtected(String name, String desc, MiddlePanel reference, String pass) {
-		super(name, desc, reference);
+	public CategoryProtected(String name, String desc, MiddlePanel reference, String pass, String path) {
+		super(name, desc, reference, pass, "defaults" + File.separator + "folder-blue-locked-icon.png");
+		System.out.println("Path figlio1: " + getPath());
 		setPassword(pass);
-		System.out.println("Pass: " + getPassword());
-	}
-	
-	
-	@Override
-	public void setUpIcon() {
-		System.out.println("Path prot: " + getPath());
-		System.out.println("Pass: " + getPassword());
-		super.setIcon(super.chooseImageForIcon(getPath()));
-	}
-	
-	@Override
-	public String getPath() {
-		return path;
+		PasswordCheck pc = new PasswordCheck(this);
 	}
 	
 	public String getPassword() {
 		return password;
 	}
+	
 	public void setPassword(String password) {
+		System.out.println("Password nel set: " + password);
 		this.password = password;
 	}
 

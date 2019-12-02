@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -108,21 +109,24 @@ public class NewCategory extends JFrame{
 				if(getProtectedStatus().isSelected()) {
 					try {
 						String pass = getPasswBox().getText();
+						System.out.println("Pass interno : " + pass);
 						//TODO: non funziona il get path della categoria protetta :(
-						CategoryProtected protcat = new CategoryProtected(name, desc, getParentPan().getP2(), pass);
+						CategoryProtected protcat = new CategoryProtected(name, desc, getParentPan().getP2(), pass, "");
 						createCat(protcat);
 						Status s = new Status(true, "Categoria protetta creata correttamente");
 					} catch (Exception e1) {
+						e1.printStackTrace();
 						Status s = new Status(false, "Errore nel creare categoria protetta");
 					}
 				}
 				//checkbox is not selected so a normal category will be created
 				else {
 					try {
-						Category cat = new Category(name, desc, getParentPan().getP2());
+						Category cat = new Category(name, desc, getParentPan().getP2(), "", "defaults" + File.separator + "folder-blue-icon.png");
 						createCat(cat);
 						Status s = new Status(true, "Categoria creata correttamente");
 					} catch (Exception e1) {
+						e1.printStackTrace();
 						Status s = new Status(false, "Errore nel creare categoria");
 					}
 					

@@ -29,7 +29,7 @@ public class Category implements MouseListener {
 	private String description;
 	private ArrayList<Image> defCat;
 	private JLabel caticon;
-	private String path = "defaults" + File.separator + "folder-blue-icon.png";
+	private String path;
 	private static MiddlePanel ref;
 	
 	/**
@@ -38,40 +38,39 @@ public class Category implements MouseListener {
 	 * @param name name of the instance of Category
 	 * @param desc description of the instance of Category
 	 */
-	public Category(String name, String desc, MiddlePanel reference) {
+	public Category(String name, String desc, MiddlePanel reference, String password, String path) {
 		Category.setRef(reference);
-		newCategorySetUp();
 		setName(name);
 		setDescription(desc);
-		this.caticon.addMouseListener(this);
-		System.out.println("cat created");
+		setPath(path);
+		newCategorySetUp(path);
+		getIcon().addMouseListener(this);
 	}
 	
 	//to override in protected
-	public void newCategorySetUp() {
-		this.setDefCat(new ArrayList<Image>());
-		this.setMaxImages(0);
-		this.setDataOfCreation(java.time.LocalDateTime.now());
-		setUpIcon();
+	public void newCategorySetUp(String defaultPath) {
+		setDefCat(new ArrayList<Image>());
+		setMaxImages(0);
+		setDataOfCreation(java.time.LocalDateTime.now());
+		setUpIcon(defaultPath);
 	}
 	
-	public void setUpIcon() {
-		this.setIcon(chooseImageForIcon(this.getPath()));
+	public void setUpIcon(String defaultPath) {
+		setIcon(chooseImageForIcon(defaultPath));
 	}
 	
 	public JLabel chooseImageForIcon(String defaultIcon) {
 		
 		//default icon
-		System.out.println("dim: " + this.getDefCat().size());
-		if(this.defCat.size() == 0) {
-			BufferedImage ex;
-			try {
-				ex = ImageIO.read(new File(defaultIcon));
-				return ImageFunctions.displayImage(ex);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if(getDefCat().size() == 0) {
+			return ImageFunctions.chooseImageForIcon(defaultIcon);
+//			BufferedImage ex;
+//			try {
+//				ex = ImageIO.read(new File(defaultIcon));
+//				return ImageFunctions.displayImage(ex);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 		}
 		//random icon taken from the images in the category
 		else {
@@ -79,9 +78,6 @@ public class Category implements MouseListener {
 			int randnum = random.nextInt(this.getDefCat().size());
 			return ImageFunctions.displayImage(this.getDefCat().get(randnum).getRawimage());
 		}
-		
-		System.out.println("Caricamento fallito");
-		return null;
 	}
 	
 	public int getMaxImages() {
@@ -151,6 +147,7 @@ public class Category implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
 		if(e.getClickCount() == 2) {
 			
 		}
