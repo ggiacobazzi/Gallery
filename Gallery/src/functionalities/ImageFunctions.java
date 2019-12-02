@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
+import java.util.Random;
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -79,6 +81,25 @@ public class ImageFunctions{
 		picLabel.setVisible(true);
 		return picLabel;
 	}
+	/**
+	 * method used to display icons in various panel in the program	
+	 * @param iconPath
+	 * @return it calls another method specialized in creating a JLabel that will be returned here
+	 * 		   null if it fails to read the image (it should not happen at all)
+	 */
+	public static JLabel chooseImageForIcon(String iconPath) {
+		BufferedImage ex;
+		try {
+			ex = ImageIO.read(new File(iconPath));
+			return ImageFunctions.displayImage(ex);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Caricamento fallito");
+		return null;
+	}
+	
 	
 //	/**
 //	 * method used to save a file locally from a url

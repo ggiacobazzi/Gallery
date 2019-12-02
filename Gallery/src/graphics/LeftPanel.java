@@ -33,6 +33,12 @@ public class LeftPanel extends JPanel{
 		this.setMinimumSize(new Dimension(300,400));
 	}
 	
+	public void DisplayInfos() {
+		
+		
+	}
+	
+	
 	public String getName() {
 		return name;
 	}
