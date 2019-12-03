@@ -37,31 +37,32 @@ public class Category implements MouseListener {
 	 * @method used to initialize the list containing the images
 	 * @param name name of the instance of Category
 	 * @param desc description of the instance of Category
+	 * @param status used to determine if the category is protected or not (in order to add the default icon)
 	 */
-	public Category(String name, String desc, MiddlePanel reference, String password, String path) {
+	public Category(String name, String desc, MiddlePanel reference, String password, String path, Boolean status) {
 		Category.setRef(reference);
 		setName(name);
 		setDescription(desc);
 		setPath(path);
-		newCategorySetUp(path);
+		newCategorySetUp(path, status);
 		getIcon().addMouseListener(this);
 	}
 	
 	//to override in protected
-	public void newCategorySetUp(String defaultPath) {
+	public void newCategorySetUp(String defaultPath, Boolean status) {
 		setDefCat(new ArrayList<Image>());
 		setMaxImages(0);
 		setDataOfCreation(java.time.LocalDateTime.now());
-		setUpIcon(defaultPath);
+		setUpIcon(defaultPath, status);
 	}
 	
-	public void setUpIcon(String defaultPath) {
-		setIcon(chooseImageForIcon(defaultPath));
+	public void setUpIcon(String defaultPath, Boolean status) {
+		setIcon(chooseImageForIcon(defaultPath, status));
 	}
 	
-	public JLabel chooseImageForIcon(String defaultIcon) {
+	public JLabel chooseImageForIcon(String defaultIcon, Boolean status) {
 		
-		//default icon
+		//default icon if there are no images in the category
 		if(getDefCat().size() == 0) {
 			return ImageFunctions.chooseImageForIcon(defaultIcon);
 //			BufferedImage ex;
@@ -73,10 +74,14 @@ public class Category implements MouseListener {
 //			}
 		}
 		//random icon taken from the images in the category
-		else {
+		else if(status) {
 			Random random = new Random();
 			int randnum = random.nextInt(this.getDefCat().size());
 			return ImageFunctions.displayImage(this.getDefCat().get(randnum).getRawimage());
+		}
+		//default icon if there are images in a protected category
+		else {
+			return ImageFunctions.chooseImageForIcon(defaultIcon);
 		}
 	}
 	
@@ -147,7 +152,7 @@ public class Category implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		ref.getLp().DisplayInfos(this, null, true);
 		if(e.getClickCount() == 2) {
 			
 		}

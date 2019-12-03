@@ -26,6 +26,7 @@ public class MiddlePanel extends JPanel implements MouseListener {
 	private PhotoAlbum currentAlbum;
 	private Category currentCategory;
 	private Image currentImage;
+	private LeftPanel lp;
 	public MiddlePanel(Color c) {
 		//default category without name and description
 		this.setCurrentAlbum(new PhotoAlbum());
@@ -82,6 +83,14 @@ public class MiddlePanel extends JPanel implements MouseListener {
 	}
 	
 	
+	public LeftPanel getLp() {
+		return lp;
+	}
+
+	public void setLp(LeftPanel lp) {
+		this.lp = lp;
+	}
+
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub

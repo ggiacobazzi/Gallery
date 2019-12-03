@@ -122,7 +122,7 @@ public class NewCategory extends JFrame{
 				//checkbox is not selected so a normal category will be created
 				else {
 					try {
-						Category cat = new Category(name, desc, getParentPan().getP2(), "", "defaults" + File.separator + "folder-blue-icon.png");
+						Category cat = new Category(name, desc, getParentPan().getP2(), "", "defaults" + File.separator + "folder-blue-icon.png", true);
 						createCat(cat);
 						Status s = new Status(true, "Categoria creata correttamente");
 					} catch (Exception e1) {

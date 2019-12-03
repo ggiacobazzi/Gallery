@@ -1,6 +1,7 @@
 package windows;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
@@ -27,10 +28,11 @@ public class PasswordCheck extends JFrame{
 		super("Input password");
 		this.setSize(new Dimension(700, 300));
 		this.setResizable(false);
+		this.setLayout(new FlowLayout());
 		JPanel jp = new JPanel();
 		jp.setPreferredSize(this.getPreferredSize());
-		createWindow(jp);
 		this.add(jp);
+		createWindow(jp);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

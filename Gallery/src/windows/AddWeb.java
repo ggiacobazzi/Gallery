@@ -36,7 +36,6 @@ public class AddWeb extends JFrame implements ActionListener {
 	private String urlstring;
 	private JTextField box;
 	private BufferedImage pic;
-	private Boolean loaded;
 	private LowerPanel lp;
 	private File downloadedfile;
 	
@@ -45,13 +44,12 @@ public class AddWeb extends JFrame implements ActionListener {
 	 * @param pic
 	 */
 	public AddWeb(LowerPanel lowerPanel) {
-		//super("Add Image from web");
-		JFrame jf = new JFrame("Add Image from web");
-		jf.setSize(new Dimension(500, 100));
-		jf.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
-		jf.setResizable(false);
+		super("Add Image from web");
+		this.setSize(new Dimension(500, 100));
+		this.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 5));
+		this.setResizable(false);
 		JPanel jp = new JPanel();
-		jf.add(jp);
+		this.add(jp);
 		JLabel jtf = new JLabel("Insert URL: ");
 		jp.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		jp.add(jtf);
@@ -61,12 +59,11 @@ public class AddWeb extends JFrame implements ActionListener {
 		JButton send = new JButton("Enter");
 		jp.add(send);
 		send.addActionListener(this);
-		jf.setLocationRelativeTo(null);
-		jf.dispatchEvent(new WindowEvent(jf, WindowEvent.WINDOW_CLOSING));
+		this.setLocationRelativeTo(null);
+		this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		//jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		jf.setVisible(true);
-		jf.pack();
-		this.loaded = false;
+		this.setVisible(true);
+		this.pack();
 		this.lp = lowerPanel;
 	}
 	/**
@@ -114,12 +111,6 @@ public class AddWeb extends JFrame implements ActionListener {
 	}
 	public void setPic(BufferedImage pic) {
 		this.pic = pic;
-	}
-	public Boolean getLoaded() {
-		return this.loaded;
-	}
-	public void setLoaded(Boolean loaded) {
-		this.loaded = loaded;
 	}
 	public void setFile(String str) {
 		this.downloadedfile = new File(str);

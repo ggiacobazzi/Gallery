@@ -15,7 +15,7 @@ public class CategoryProtected extends Category {
 
 	private String password;
 	public CategoryProtected(String name, String desc, MiddlePanel reference, String pass, String path) {
-		super(name, desc, reference, pass, "defaults" + File.separator + "folder-blue-locked-icon.png");
+		super(name, desc, reference, pass, "defaults" + File.separator + "folder-blue-locked-icon.png", false);
 		System.out.println("Path figlio1: " + getPath());
 		setPassword(pass);
 		PasswordCheck pc = new PasswordCheck(this);

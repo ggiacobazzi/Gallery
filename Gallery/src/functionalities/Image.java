@@ -35,7 +35,7 @@ public class Image {
 			this.setLastaccess(this.getAttr().lastAccessTime());
 			this.setLastmodification(this.getAttr().lastModifiedTime());
 			this.setName(rawfile.getName());
-			this.setExtension(getExtension(rawfile));
+			this.setExtension(determineExt(rawfile));
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -47,6 +47,18 @@ public class Image {
 		this.setRawimage(img);
 		this.setName(name);
 	}
+	
+	public String determineExt(File rawfile) {
+		 if (rawfile == null) {
+		        return "";
+		    }
+		    String name = rawfile.getName();
+		    int i = name.lastIndexOf('.');
+		    
+		    String ext = i > 0 ? name.substring(i + 1) : "";
+		    return ext;
+	}
+	
 	/**
 	 * Set/Getters for the class
 	 * @return
@@ -83,14 +95,8 @@ public class Image {
 		this.name = name;
 	}
 	
-	public String getExtension(File img) {
-		 if (img == null) {
-		        return "";
-		    }
-		    String name = img.getName();
-		    int i = name.lastIndexOf('.');
-		    this.extension = i > 0 ? name.substring(i + 1) : "";
-		    return this.extension;
+	public String getExtension() {
+		return this.extension;
 	}
 	
 	public void setExtension(String ext) {

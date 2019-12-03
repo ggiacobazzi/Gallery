@@ -84,6 +84,7 @@ public class MainFrame extends JFrame implements MouseListener{
 		
 		//Middle Panel 
 		this.p2 = new MiddlePanel(java.awt.Color.PINK);
+		p2.setLp(p1);
 		this.ip = new ImagePanel(p2);
 		this.jsp = new JScrollPane(ip, 
 			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
