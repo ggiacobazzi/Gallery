@@ -2,10 +2,16 @@ package graphics;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.nio.file.attribute.FileTime;
 
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import functionalities.Category;
+import functionalities.CategoryProtected;
+import functionalities.Image;
 
 public class LeftPanel extends JPanel{
 
@@ -20,6 +26,7 @@ public class LeftPanel extends JPanel{
 	private FileTime creation;
 	private FileTime lastaccess;
 	private FileTime lastmodification;
+	private JPanel jp;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -28,13 +35,45 @@ public class LeftPanel extends JPanel{
 	}
 	public void CreatePanel(Color c) {
 		this.setBackground(c);
-		this.setLayout(new GridBagLayout());
-		this.setPreferredSize(new Dimension(200,400));
-		this.setMinimumSize(new Dimension(300,400));
+		this.setPreferredSize(new Dimension(400,400));
+		this.setMinimumSize(new Dimension(400,400));
 	}
 	
-	public void DisplayInfos() {
+	/**
+	 * method used to display metadata of the object (category or image)
+	 * @param cat reference to the category clicked
+	 * @param img reference to the image clicked
+	 * @param catOrimage boolean used in order to distinguish what to do
+	 */
+	public void DisplayInfos(Category cat, Image img, Boolean catOrimage) {
+		if(jp != null)
+			this.remove(jp);
+		jp = new JPanel();
+		jp.setLayout(new BoxLayout(jp, BoxLayout.Y_AXIS));
 		
+		if(catOrimage) {
+			JLabel jlName = new JLabel("Name: " + cat.getName());
+			jp.add(jlName);
+			JLabel jlDesc = new JLabel("Description: " + cat.getDescription());
+			jp.add(jlDesc);
+			JLabel jlDate = new JLabel("Date of creation: " + cat.getDataOfCreation());
+			jp.add(jlDate);
+			JLabel jlDim = new JLabel("Total Photos: " + cat.getDefCat().size());
+			jp.add(jlDim);
+			JLabel jlProtStat = new JLabel("Protected: " + (cat instanceof CategoryProtected));
+			jp.add(jlProtStat);
+		}
+		else {
+			JLabel jlName = new JLabel("Name: " + img.getName());
+			jp.add(jlName);
+			JLabel jlExt = new JLabel("Extension: " + img.getExtension());
+			jp.add(jlExt);
+			JLabel jlDim = new JLabel("Dimension: " + img.getDimension());
+			jp.add(jlDim);
+		}
+		
+		this.add(jp);
+		SwingUtilities.updateComponentTreeUI(this);
 		
 	}
 	
