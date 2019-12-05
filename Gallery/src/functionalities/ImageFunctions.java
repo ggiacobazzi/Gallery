@@ -1,25 +1,15 @@
 package functionalities;
 
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
-import java.util.Random;
-
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import graphics.LowerPanel;
+import graphics.MiddlePanel;
 import windows.*;
 
 public class ImageFunctions{
@@ -100,6 +90,11 @@ public class ImageFunctions{
 		return null;
 	}
 	
+	//TODO remove image from a category-->method gets called in Remove.java
+	public void removeImage(Category cat, MiddlePanel mp) {
+		
+		
+	}
 	
 //	/**
 //	 * method used to save a file locally from a url

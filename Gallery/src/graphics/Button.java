@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import functionalities.Category;
 import functionalities.ImageFunctions;
 import windows.NewCategory;
+import windows.Remove;
 
 public class Button extends JButton implements ActionListener {
 
@@ -41,20 +42,19 @@ public void actionPerformed(ActionEvent e) {
 			ImageFunctions.loadImage(true, this.getParentpanel());
 		}
 		else if(str.equals("remove")) {
-			
+			Remove rem = new Remove(getParentpanel().getP2().getCurrentCategory());
 		}
-		else if(str.equals("newcat")) {
-			String ciao = "ciao";
-			NewCategory newcat = new NewCategory(parentpanel);
-//			Category cat = new Category(ciao, ciao, parentpanel.getP2());
-//			parentpanel.getImagePanel().add(cat.getIcon());
-//			System.out.println("cat added");
-//			SwingUtilities.updateComponentTreeUI(parentpanel.getImagePanel());
-//			parentpanel.getP2().getCurrentAlbum().addCategory(parentpanel.getP2().getCurrentAlbum(), cat);
-//			System.out.println("Categorie totali: " + parentpanel.getP2().getCurrentAlbum().getCategoryList().size());
+		else if(str.equals("removecat")) {
+			
 		}
 		else if(str.equals("copyto")) {
 			
+		}
+		else if(str.equals("mergeto")){
+			
+		}
+		else if(str.equals("newcat")) {
+			NewCategory newcat = new NewCategory(parentpanel);
 		}
 		else if (str.equals("prev")){
 			
