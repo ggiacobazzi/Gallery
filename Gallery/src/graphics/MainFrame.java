@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 
+import functionalities.BuildNewLayout;
 import functionalities.PhotoAlbum;
 
 
@@ -83,9 +84,10 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.container.add(p1, gbc);
 		
 		//Middle Panel 
-		this.p2 = new MiddlePanel(java.awt.Color.PINK);
+		this.p2 = new MiddlePanel(java.awt.Color.PINK, this);
 		p2.setLp(p1);
 		this.ip = new ImagePanel(p2);
+		p2.setIp(ip);
 		this.jsp = new JScrollPane(ip, 
 			ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -120,6 +122,14 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.setVisible(true);
 	}
 	
+	public MiddlePanel getMiddlePanel() {
+		return p2;
+	}
+	
+	public void setMiddlePanel(MiddlePanel p2) {
+		this.p2 = p2;
+	}
+	
 	public MiddlePanel getHome() {
 		return home;
 	}
@@ -136,7 +146,12 @@ public class MainFrame extends JFrame implements MouseListener{
 		this.album = album;
 	}
 
-	
+	public MiddlePanel updateFrame() {
+		BuildNewLayout bnl = new BuildNewLayout();
+		//Set new MiddlePanel that will be displayed
+		setMiddlePanel(bnl.Enter(getMiddlePanel()));
+		return getMiddlePanel();
+	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {

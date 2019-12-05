@@ -2,7 +2,6 @@ package functionalities;
 
 import java.awt.Component;
 import java.io.File;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
  
 /* Utils.java is used by FileChooserDemo2.java. */
@@ -31,7 +30,7 @@ public class Utils {
     /*
      * Enable/Disable a panel
      */
-    void setPanelEnabled(JPanel panel, Boolean isEnabled) {
+    public JPanel setPanelEnabled(JPanel panel, Boolean isEnabled) {
         panel.setEnabled(isEnabled);
 
         Component[] components = panel.getComponents();
@@ -42,6 +41,8 @@ public class Utils {
             }
             component.setEnabled(isEnabled);
         }
+        
+        return panel;
     }
     
 }

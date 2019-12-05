@@ -30,7 +30,7 @@ public class Category implements MouseListener {
 	private ArrayList<Image> defCat;
 	private JLabel caticon;
 	private String path;
-	private static MiddlePanel ref;
+	private MiddlePanel ref;
 	
 	/**
 	 * Constructor that uses "name" and "desc" to create a "Category" class 
@@ -40,7 +40,7 @@ public class Category implements MouseListener {
 	 * @param status used to determine if the category is protected or not (in order to add the default icon)
 	 */
 	public Category(String name, String desc, MiddlePanel reference, String password, String path, Boolean status) {
-		Category.setRef(reference);
+		setRef(reference);
 		setName(name);
 		setDescription(desc);
 		setPath(path);
@@ -141,20 +141,35 @@ public class Category implements MouseListener {
 		this.path = path;
 	}
 
-	public static MiddlePanel getRef() {
-		return ref;
+	public MiddlePanel getRef() {
+		return this.ref;
 	}
 
-	public static void setRef(MiddlePanel ref) {
-		Category.ref = ref;
+	public void setRef(MiddlePanel ref) {
+		this.ref = ref;
 	}
 
+	public void sendInfos() {
+		
+		
+	}
+	
+	public void displayContents() {
+		//Display all the images contained in the category
+		for(int i = 0; i < this.getDefCat().size(); i++) {
+			getRef().getIp().add(ImageFunctions.displayImage(this.getDefCat().get(i).getRawimage()));
+		}
+		
+	}
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		ref.getLp().DisplayInfos(this, null, true);
 		if(e.getClickCount() == 2) {
-			
+			setRef(ref.getParent().updateFrame());
+			displayContents();
 		}
 	}
 

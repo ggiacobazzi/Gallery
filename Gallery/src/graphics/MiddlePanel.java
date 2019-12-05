@@ -27,19 +27,22 @@ public class MiddlePanel extends JPanel implements MouseListener {
 	private Category currentCategory;
 	private Image currentImage;
 	private LeftPanel lp;
-	public MiddlePanel(Color c) {
+	private MainFrame parent;
+	private ImagePanel ip;
+	public MiddlePanel(Color c, MainFrame mf) {
 		//default category without name and description
-		this.setCurrentAlbum(new PhotoAlbum());
-		this.CreatePanel(c);
+		setCurrentAlbum(new PhotoAlbum());
+		setParent(mf);
+		CreatePanel(c);
 	}
 	
 	public void CreatePanel(Color c) {
-		this.setBackground(c);
-		this.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
+		setBackground(c);
+		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		//this.setLayout(new WrapLayout(WrapLayout.LEFT, 0,0));
-		this.setMinimumSize(new Dimension(400,400));
-		this.setPreferredSize(new Dimension(1100, 750));
-		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		setMinimumSize(new Dimension(400,400));
+		setPreferredSize(new Dimension(1100, 750));
+		setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 	}
 
 	public int getImgcurr() {
@@ -89,6 +92,22 @@ public class MiddlePanel extends JPanel implements MouseListener {
 
 	public void setLp(LeftPanel lp) {
 		this.lp = lp;
+	}
+
+	public MainFrame getParent() {
+		return parent;
+	}
+
+	public void setParent(MainFrame parent) {
+		this.parent = parent;
+	}
+
+	public ImagePanel getIp() {
+		return ip;
+	}
+
+	public void setIp(ImagePanel ip) {
+		this.ip = ip;
 	}
 
 	@Override
