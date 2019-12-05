@@ -38,16 +38,16 @@ public class NewCategory extends JFrame{
 	public NewCategory(LowerPanel ref) {
 		setParentPan(ref);
 		JFrame jf = new JFrame("Add Category");
-		jf.setSize(new Dimension(700, 300));
-		jf.setResizable(false);
+		setSize(new Dimension(700, 300));
+		setResizable(false);
 		JPanel jp = new JPanel();
 		createWindow(jp);
-		jf.add(jp);
-		jf.setLocationRelativeTo(null);
-		jf.dispatchEvent(new WindowEvent(jf, WindowEvent.WINDOW_CLOSING));
-		jf.setVisible(true);
-		jf.pack();
-		setWindowRef(jf);
+		add(jp);
+		setLocationRelativeTo(null);
+		dispatchEvent(new WindowEvent(jf, WindowEvent.WINDOW_CLOSING));
+		setVisible(true);
+		pack();
+		setWindowRef(this);
 	}
 
 	/**
