@@ -41,10 +41,12 @@ public class ImageFunctions{
 					try {
 						immy = ImageIO.read(file);
 						Image newimage = new Image(immy, file);
+						lowerPanel.getP2().getCurrentCategory().getDefCat().add(newimage);
 						lowerPanel.getP2().getCurrentAlbum().getList().add(newimage);
+						System.out.println("Oggetti in lista: " + lowerPanel.getP2().getCurrentCategory().getDefCat().size());
 						Status s = new Status(true, "Immagine caricata correttamente");
 						lowerPanel.getImagePanel().add(displayImage(newimage.getRawimage()));
-						SwingUtilities.updateComponentTreeUI(lowerPanel.getImagePanel());
+						SwingUtilities.updateComponentTreeUI(lowerPanel.getP2().getParent());
 					} catch (IOException e) {
 						e.printStackTrace();
 						Status s = new Status(false, "Immagine non caricata correttamente");
@@ -91,8 +93,9 @@ public class ImageFunctions{
 	}
 	
 	//TODO remove image from a category-->method gets called in Remove.java
-	public void removeImage(Category cat, MiddlePanel mp) {
-		
+	public static void removeImage(Category cat, int index, MiddlePanel mp) {
+		cat.getDefCat().remove(index);
+		SwingUtilities.updateComponentTreeUI(mp.getIp());
 		
 	}
 	

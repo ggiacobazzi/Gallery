@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class LowerPanel extends JPanel {
 	
 	public LowerPanel(Color c, LeftPanel p1, MiddlePanel p2, ImagePanel ip, JFrame jf) {
 		this.setP2(p2);
+		setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
 		this.setImagePanel(ip);
 		this.CreatePanel(c);
 	}

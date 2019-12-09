@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import functionalities.Category;
 import functionalities.ImageFunctions;
+import graphics.MiddlePanel;
 
 /**
  * Class that creates the Remove Window when the user presses the remove button
@@ -35,15 +36,15 @@ public class Remove extends JFrame{
 	private JFrame windowRef;
 	private static final long serialVersionUID = 1L;
 
-	public Remove(Category cat) {
+	public Remove(Category cat, MiddlePanel mp) {
 		super("Remove an image: ");
 		setPreferredSize(new Dimension(700, 300));
 		setResizable(false);
-		createWindow(cat);
+		createWindow(cat, mp);
 		setWindowRef(this);
 	}
 	
-	public void createWindow(Category cat) {
+	public void createWindow(Category cat, MiddlePanel mp) {
 		//Image Panel
 		setJpIm(new JPanel());
 		setImage(new JLabel());
@@ -58,6 +59,7 @@ public class Remove extends JFrame{
 		//Buttons panel
 		setJpBut(new JPanel());
 		getJpBut().setLayout(new BoxLayout(getJpBut(), BoxLayout.Y_AXIS));
+		
 		//Confirm button
 		JButton confBt = new JButton("Confirm");
 		getJpBut().add(confBt);
@@ -66,12 +68,11 @@ public class Remove extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				ImageFunctions.removeImage(cat, jcb.getSelectedIndex(), mp);
 			}
 			
-			
-			
 		});
+		
 		//Cancel button
 		JButton cancBt = new JButton("Cancel");
 		getJpBut().add(cancBt);

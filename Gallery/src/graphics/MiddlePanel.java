@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import functionalities.Category;
@@ -29,16 +30,24 @@ public class MiddlePanel extends JPanel implements MouseListener {
 	private LeftPanel lp;
 	private MainFrame parent;
 	private ImagePanel ip;
-	public MiddlePanel(Color c, MainFrame mf) {
+	public MiddlePanel(Color c, MainFrame mf, LeftPanel p1, ImagePanel ip) {
 		//default category without name and description
 		setCurrentAlbum(new PhotoAlbum());
 		setParent(mf);
+		setLp(p1);
 		CreatePanel(c);
+		if(ip == null) {
+			System.out.println("ciao");
+			ImagePanel newIp = new ImagePanel(this);
+			setIp(newIp);
+			System.out.println("Image Panel: " + getIp());
+		}
 	}
 	
 	public void CreatePanel(Color c) {
 		setBackground(c);
 		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
+		setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
 		//this.setLayout(new WrapLayout(WrapLayout.LEFT, 0,0));
 		setMinimumSize(new Dimension(400,400));
 		setPreferredSize(new Dimension(1100, 750));

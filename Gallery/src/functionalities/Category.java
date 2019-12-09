@@ -168,7 +168,7 @@ public class Category implements MouseListener {
 		// TODO Auto-generated method stub
 		ref.getLp().DisplayInfos(this, null, true);
 		if(e.getClickCount() == 2) {
-			setRef(ref.getParent().updateFrame());
+			setRef(ref.getParent().updateFrame(this));
 			displayContents();
 		}
 	}

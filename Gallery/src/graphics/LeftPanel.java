@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.nio.file.attribute.FileTime;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,9 +35,10 @@ public class LeftPanel extends JPanel{
 		this.CreatePanel(c);
 	}
 	public void CreatePanel(Color c) {
-		this.setBackground(c);
-		this.setPreferredSize(new Dimension(400,400));
-		this.setMinimumSize(new Dimension(400,400));
+		setBackground(c);
+		setPreferredSize(new Dimension(400,400));
+		setBorder(BorderFactory.createLineBorder(Color.GREEN, 5));
+		setMinimumSize(new Dimension(400,400));
 	}
 	
 	/**

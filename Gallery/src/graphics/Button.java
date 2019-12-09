@@ -42,7 +42,7 @@ public void actionPerformed(ActionEvent e) {
 			ImageFunctions.loadImage(true, this.getParentpanel());
 		}
 		else if(str.equals("remove")) {
-			Remove rem = new Remove(getParentpanel().getP2().getCurrentCategory());
+			Remove rem = new Remove(getParentpanel().getP2().getCurrentCategory(), getParentpanel().getP2());
 		}
 		else if(str.equals("removecat")) {
 			
